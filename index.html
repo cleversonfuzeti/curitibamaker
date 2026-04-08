@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curitiba Maker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --orange: #f26522;
+      --orange-dark: #cc4a10;
+      --orange-light: #f58850;
+      --orange-pale: #fce8de;
+      --blue: #004f9f;
+      --blue-mid: #005fae;
+      --blue-light: #0073cc;
+      --blue-pale: #e5ebf3;
+      --white: #FFFFFF;
+      --gray-light: #f4f5f7;
+      --gray-mid: #E8E6E1;
+      --gray-text: #555550;
+      --text-dark: #112e5a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+    }
+
+    /* BARRA MENU UNICO PMC (Padrão Oficial - Cursos) */
+    .portal-pmc-topo-padrao-principal {
+      background: #f2f2f2;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .portal-pmc-topo-padrao-v-1 {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 40px;
+    }
+
+    .portal-pmc-topo-padrao-v-1-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .portal-pmc-topo-padrao-v-1-logo img {
+      height: 18px;
+      /* Ajuste para o logo da prefeitura não expandir muito */
+      display: block;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links li:not(:last-child)::after {
+      content: "|";
+      color: #bbbbbb;
+      font-size: 11px;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links a {
+      color: #333333;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links a:hover {
+      color: #004f9f;
+      text-decoration: underline;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 100%;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    .nav-logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: white;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo-text span {
+      color: var(--orange-light);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      padding: 0 1rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+      border-bottom-color: var(--orange);
+    }
+
+    .nav-cta {
+      background: var(--orange);
+      color: white !important;
+      border-radius: 6px;
+      padding: 0 1.25rem !important;
+      height: 36px !important;
+      margin-left: 1rem;
+      font-weight: 500 !important;
+      border-bottom: none !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--orange-dark) !important;
+      color: white !important;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--blue);
+      min-height: 540px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-content {
+      padding: 5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 128, 0, 0.15);
+      border: 1px solid rgba(255, 128, 0, 0.4);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--orange-light);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+
+    .hero-badge span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 440px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: white;
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-weight: 400;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(255, 255, 255, 0.6);
+      color: white;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(255, 255, 255, 0.5) 30px, rgba(255, 255, 255, 0.5) 31px),
+        repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(255, 255, 255, 0.5) 30px, rgba(255, 255, 255, 0.5) 31px);
+    }
+
+    .hero-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 3rem 3rem 3rem 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+
+    .hero-card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-card-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    .hero-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .hero-card p {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .hero-card.accent {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .hero-card.accent .hero-card-icon {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .hero-card.accent p {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--orange);
+      display: flex;
+      justify-content: center;
+    }
+
+    .stats-inner {
+      display: flex;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .stat-item {
+      flex: 1;
+      padding: 1.25rem 2rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: white;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* SECTIONS COMMON */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--orange);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      color: var(--gray-text);
+      font-size: 1rem;
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ABOUT */
+    .about {
+      background: var(--gray-light);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .about-feat {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--gray-mid);
+    }
+
+    .about-feat:first-child {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      background: var(--blue);
+    }
+
+    .about-feat:first-child h4 {
+      color: white;
+    }
+
+    .about-feat:first-child p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .feat-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      background: var(--orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feat-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .about-feat h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    .about-feat p {
+      font-size: 0.83rem;
+      color: var(--gray-text);
+      line-height: 1.6;
+    }
+
+    .about-steps {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .about-steps li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    .about-steps li:last-child {
+      border-bottom: none;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      background: var(--blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .step-text strong {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--blue);
+      margin-bottom: 2px;
+    }
+
+    .step-text span {
+      font-size: 0.82rem;
+      color: var(--gray-text);
+    }
+
+    /* UNIDADES */
+    .units {
+      background: white;
+    }
+
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .unit-card {
+      border: 1px solid var(--gray-mid);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .unit-card:hover {
+      box-shadow: 0 8px 30px rgba(0, 54, 64, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .unit-header {
+      background: var(--blue);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .unit-avatar {
+      width: 42px;
+      height: 42px;
+      background: var(--orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .unit-header h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .unit-header p {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .unit-body {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .unit-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .unit-info-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      font-size: 0.83rem;
+      color: var(--gray-text);
+    }
+
+    .unit-info-row svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--orange);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .unit-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .unit-tag {
+      background: var(--blue-pale);
+      color: var(--blue);
+      font-size: 0.73rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* CURSOS */
+    .courses {
+      background: var(--gray-light);
+    }
+
+    .courses-toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      padding: 7px 18px;
+      border-radius: 20px;
+      border: 1.5px solid var(--gray-mid);
+      background: white;
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--gray-text);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .filter-btn.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: white;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--gray-mid);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .course-card:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.09);
+      transform: translateY(-3px);
+    }
+
+    .course-card[data-cat].hidden {
+      display: none;
+    }
+
+    .course-thumb {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-thumb svg {
+      width: 56px;
+      height: 56px;
+      opacity: 0.9;
+    }
+
+    .course-thumb-bg-orange {
+      background: linear-gradient(135deg, #e65610, #fa843e);
+    }
+
+    .course-thumb-bg-blue {
+      background: linear-gradient(135deg, #112e5a, #004f9f);
+    }
+
+    .course-thumb-bg-teal {
+      background: linear-gradient(135deg, #004f9f, #0073cc);
+    }
+
+    .course-cat-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .course-body {
+      padding: 1.25rem;
+    }
+
+    .course-body h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blue-light);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .course-body p {
+      font-size: 0.82rem;
+      color: var(--gray-text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .course-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--gray-text);
+      flex-wrap: wrap;
+    }
+
+    .course-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .course-meta svg {
+      width: 13px;
+      height: 13px;
+      fill: var(--orange);
+    }
+
+    .course-footer {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--gray-mid);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .course-unit {
+      font-size: 0.78rem;
+      color: var(--gray-text);
+    }
+
+    .course-link {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--orange);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .course-link:hover {
+      color: var(--orange-dark);
+    }
+
+    .course-link svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: var(--blue);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section h2 em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .cta-section p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #112e5a;
+      padding: 3rem 2rem 2rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.83rem;
+      line-height: 1.7;
+      margin-top: 1rem;
+      max-width: 260px;
+    }
+
+    footer h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    footer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    footer ul a {
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      font-size: 0.83rem;
+      transition: color 0.2s;
+    }
+
+    footer ul a:hover {
+      color: var(--orange-light);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+
+    .footer-social a {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .footer-social a:hover {
+      background: var(--orange);
+    }
+
+    .footer-social svg {
+      width: 16px;
+      height: 16px;
+      fill: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-social a:hover svg {
+      fill: white;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-content {
+        padding: 3rem 1.5rem 2rem;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      nav {
+        padding: 0 1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .stats-inner {
+        flex-wrap: wrap;
+      }
+
+      .stat-item {
+        flex: 0 0 50%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 3rem 1.25rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-item {
+        flex: 0 0 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BARRA PMC -->
+  <div class="portal-pmc-topo-padrao-principal">
+    <div class="portal-pmc-topo-padrao-v-1">
+      <div class="portal-pmc-topo-padrao-v-1-logo"><a href="https://www.curitiba.pr.gov.br"><img
+            src="https://cdn.ici.curitiba.org.br/scripts/portalpmc/topo/img/logoPMC.png"
+            alt="Prefeitura Municipal de Curitiba"></a></div>
+      <div class="portal-pmc-topo-padrao-v-1-links">
+        <ul>
+          <li class="portal-pmc-topo-padrao-v-1-primeiro-link"><a
+              href="https://www.curitiba.pr.gov.br/lei13460/">CURITIBA-OUVE</a></li>
+          <li><a href="https://156.curitiba.pr.gov.br/">156</a></li>
+          <li><a href="https://www.curitiba.pr.gov.br/leiacessoinformacao/"><span
+                class="portal-pmc-topo-padrao-v-1-acesso-informacao">Acesso à </span>informação</a></li>
+          <li><a href="https://www.curitiba.pr.gov.br/secretarias/">Secretarias</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVEGAÇÃO -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <!--- <div class="nav-logo-icon">
+          <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+        </div>-->
+        <span class="nav-logo-text">CURITIBA <span>MAKER</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#sobre">Quem somos</a></li>
+        <li><a href="#unidades">Unidades</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#como-participar">Como participar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge"><span></span>Laboratório de prototipagem público</div>
+        <h1>Criatividade. Aprendizado.<br><em>Inovação.</em></h1>
+        <p><b>Democratizando</b> o acesso à tecnologia e ao conhecimento para todos os curitibanos.</p>
+        <div class="hero-actions">
+          <a href="#cursos" class="btn-primary">Ver cursos gratuitos</a>
+          <a href="#unidades" class="btn-outline">Encontrar uma unidade</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-pattern"></div>
+        <div class="hero-cards">
+          <div class="hero-card">
+            <div class="hero-card-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+              </svg>
+            </div>
+            <h3>Impressão 3D</h3>
+            <p>Prototipe suas ideias</p>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+              </svg>
+            </div>
+            <h3>Corte a Laser</h3>
+            <p>Precisão em mdf e acrílico</p>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            </div>
+            <h3>Router CNC</h3>
+            <p>Mobiliário e projetos em madeira</p>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </div>
+            <h3>Eletrônica</h3>
+            <p>Bancada de eletrônica completa</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Unidades ativas</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">30+</span>
+        <span class="stat-label">Cursos disponíveis</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">30 mil</span>
+        <span class="stat-label">Participantes/ano</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Gratuito</span>
+        <span class="stat-label">Para todos os cidadãos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOBRE / COMO PARTICIPAR -->
+  <section class="about" id="sobre">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <span class="section-label">Quem somos</span>
+          <h2 class="section-title">Laboratórios de fabricação digital para toda a cidade</h2>
+          <p class="section-sub">O Curitiba Maker é um Programa da Secretaria de Desenvolvimento Econômico e Inovação,
+            que conta com uma rede de espaços públicos de inovação onde qualquer cidadão pode
+            aprender tecnologia, desenvolver projetos e acessar equipamentos profissionais de forma gratuita.</p>
+
+          <div id="como-participar">
+            <span class="section-label" style="margin-top: 2rem; display: block;">Como participar</span>
+            <ul class="about-steps">
+              <li>
+                <div class="step-num">1</div>
+                <div class="step-text">
+                  <strong>Cadastre-se gratuitamente</strong>
+                  <span>Use seus dados do E-Cidadão Curitiba para acessar a plataforma em segundos.</span>
+                </div>
+              </li>
+              <li>
+                <div class="step-num">2</div>
+                <div class="step-text">
+                  <strong>Escolha um curso ou unidade</strong>
+                  <span>Explore o catálogo de cursos gratuitos ou encontre o laboratório mais próximo de você.</span>
+                </div>
+              </li>
+              <li>
+                <div class="step-num">3</div>
+                <div class="step-text">
+                  <strong>Faça sua inscrição</strong>
+                  <span>Inscreva-se em turmas abertas e receba a confirmação por e-mail ou SMS.</span>
+                </div>
+              </li>
+              <li>
+                <div class="step-num">4</div>
+                <div class="step-text">
+                  <strong>Crie e compartilhe</strong>
+                  <span>Desenvolva seu projeto com apoio de instrutores e compartilhe com a comunidade.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="about-visual">
+          <div class="about-feat">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+              </svg>
+            </div>
+            <div>
+              <h4>Aberto para todos</h4>
+              <p>Qualquer cidadão de Curitiba pode participar.</p>
+            </div>
+          </div>
+          <div class="about-feat">
+            <div class="feat-icon" style="background: var(--blue);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <path d="M8 21h8M12 17v4" />
+              </svg>
+            </div>
+            <h4>Equipamentos profissionais</h4>
+            <p>Impressoras 3D, fresadoras CNC, cortadoras a laser e muito mais.</p>
+          </div>
+          <div class="about-feat">
+            <div class="feat-icon" style="background: var(--blue);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+              </svg>
+            </div>
+            <h4>Instrutores qualificados</h4>
+            <p>Professores e makers com experiência prática para guiar seu aprendizado.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIDADES -->
+  <section class="units" id="unidades">
+    <div class="section-inner">
+      <span class="section-label">Onde estamos</span>
+      <h2 class="section-title">Nossas unidades</h2>
+      <p class="section-sub">Encontre o Fab Lab mais próximo de você. Todas as unidades oferecem acesso gratuito aos
+        equipamentos e cursos.</p>
+
+      <div class="units-grid">
+
+        <a href="unidade.html?id=centro" class="unit-card"
+          style="text-decoration: none; color: inherit; display: block;">
+          <div class="unit-header">
+            <div class="unit-avatar">CT</div>
+            <div>
+              <h3>Fab Lab Centro</h3>
+              <p>Centro</p>
+            </div>
+          </div>
+          <div class="unit-body">
+            <div class="unit-info">
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Rua do Centro 100 - Centro
+              </div>
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>
+                Seg–Sex 8h–12h | 13h30–17h
+              </div>
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.77 19.79 19.79 0 01.22 1.11 2 2 0 012.22 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z" />
+                </svg>
+                (41) 3350-0000
+              </div>
+            </div>
+            <div class="unit-tags">
+              <span class="unit-tag">Impressão 3D</span>
+              <span class="unit-tag">Corte Laser</span>
+              <span class="unit-tag">CNC</span>
+              <span class="unit-tag">Eletrônica</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="unidade.html?id=cic" class="unit-card" style="text-decoration: none; color: inherit; display: block;">
+          <div class="unit-header">
+            <div class="unit-avatar">CI</div>
+            <div>
+              <h3>Fab Lab CIC</h3>
+              <p>Cidade Industrial</p>
+            </div>
+          </div>
+          <div class="unit-body">
+            <div class="unit-info">
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Av. CIC, 100 — CIC
+              </div>
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>
+                Seg–Sex 8h–12h | 13h30–17h
+              </div>
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.77 19.79 19.79 0 01.22 1.11 2 2 0 012.22 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z" />
+                </svg>
+                (41) 3350-0000
+              </div>
+            </div>
+            <div class="unit-tags">
+              <span class="unit-tag">Impressão 3D</span>
+              <span class="unit-tag">Marcenaria</span>
+              <span class="unit-tag">Costura</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="unidade.html?id=boqueirao" class="unit-card"
+          style="text-decoration: none; color: inherit; display: block;">
+          <div class="unit-header">
+            <div class="unit-avatar">BQ</div>
+            <div>
+              <h3>Fab Lab Boqueirão</h3>
+              <p>Boqueirão</p>
+            </div>
+          </div>
+          <div class="unit-body">
+            <div class="unit-info">
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Rua do Boqueirão, 100 — Boqueirão
+              </div>
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>
+                Seg–Sex 8h–12h | 13h30–17h
+              </div>
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.77 19.79 19.79 0 01.22 1.11 2 2 0 012.22 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z" />
+                </svg>
+                (41) 3350-0000
+              </div>
+            </div>
+            <div class="unit-tags">
+              <span class="unit-tag">Corte Laser</span>
+              <span class="unit-tag">Eletrônica</span>
+              <span class="unit-tag">Robótica</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="unidade.html?id=cajuru" class="unit-card"
+          style="text-decoration: none; color: inherit; display: block;">
+          <div class="unit-header">
+            <div class="unit-avatar">CJ</div>
+            <div>
+              <h3>Fab Lab Cajuru</h3>
+              <p>Cajuru</p>
+            </div>
+          </div>
+          <div class="unit-body">
+            <div class="unit-info">
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Av. Prefeito Maurício Fruet, 2150 — Cajuru
+              </div>
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>
+                Seg–Sex 8h–12h | 13h30–17h
+              </div>
+              <div class="unit-info-row">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.77 19.79 19.79 0 01.22 1.11 2 2 0 012.22 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z" />
+                </svg>
+                (41) 3221-2421
+              </div>
+            </div>
+            <div class="unit-tags">
+              <span class="unit-tag">Impressão 3D</span>
+              <span class="unit-tag">CNC</span>
+              <span class="unit-tag">Design</span>
+              <span class="unit-tag">Corte Laser</span>
+              <span class="unit-tag">Eletrônica</span>
+              <span class="unit-tag">Robótica</span>
+              <span class="unit-tag">Impressão 3D</span>
+              <span class="unit-tag">Marcenaria</span>
+              <span class="unit-tag">Costura</span>
+            </div>
+          </div>
+        </a>
+
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CURSOS -->
+  <section class="courses" id="cursos">
+    <div class="section-inner">
+      <span class="section-label">Aprenda de graça</span>
+      <h2 class="section-title">Catálogo de cursos gratuitos</h2>
+      <p class="section-sub">Todos os cursos são gratuitos e abertos à comunidade. Escolha uma área e comece sua jornada
+        maker.</p>
+
+      <div class="courses-toolbar">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="fabricacao">Fabricação Digital</button>
+        <button class="filter-btn" data-filter="eletro">Eletrônica</button>
+        <button class="filter-btn" data-filter="prog">Programação</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+      </div>
+
+      <div class="courses-grid" id="courses-grid">
+
+        <div class="course-card" data-cat="fabricacao">
+          <div class="course-thumb course-thumb-bg-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+              <path d="M6 3h12l3 9-3 3H6l-3-3z" />
+              <path d="M3 12h18M12 3v18" />
+            </svg>
+            <span class="course-cat-badge">Fabricação Digital</span>
+          </div>
+          <div class="course-body">
+            <h3>Impressão 3D: Introdução ao FDM</h3>
+            <p>Aprenda os fundamentos da impressão 3D FDM, da modelagem ao produto final com filamentos PLA e PETG.</p>
+            <div class="course-meta">
+              <span><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg> 16h</span>
+              <span><svg viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                </svg> Iniciante</span>
+            </div>
+          </div>
+          <div class="course-footer">
+            <span class="course-unit">Centro Cívico • Boa Vista</span>
+            <a href="#" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg></a>
+          </div>
+        </div>
+
+        <div class="course-card" data-cat="fabricacao">
+          <div class="course-thumb course-thumb-bg-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+              <path
+                d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+            </svg>
+            <span class="course-cat-badge">Fabricação Digital</span>
+          </div>
+          <div class="course-body">
+            <h3>Corte a Laser: Bijuterias em Acrílico</h3>
+            <p>Crie bijuterias únicas usando Inkscape e a cortadora a laser. Do design ao produto acabado.</p>
+            <div class="course-meta">
+              <span><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg> 12h</span>
+              <span><svg viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                </svg> Iniciante</span>
+            </div>
+          </div>
+          <div class="course-footer">
+            <span class="course-unit">Boqueirão • Pinheirinho</span>
+            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg></a>
+          </div>
+        </div>
+
+        <div class="course-card" data-cat="eletro">
+          <div class="course-thumb course-thumb-bg-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+            <span class="course-cat-badge">Eletrônica</span>
+          </div>
+          <div class="course-body">
+            <h3>Arduino: Introdução com Sensores e Motores</h3>
+            <p>Monte circuitos com Arduino e aprenda a controlar sensores de temperatura, movimento e motores DC.</p>
+            <div class="course-meta">
+              <span><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg> 20h</span>
+              <span><svg viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                </svg> Básico</span>
+            </div>
+          </div>
+          <div class="course-footer">
+            <span class="course-unit">Todas as unidades</span>
+            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg></a>
+          </div>
+        </div>
+
+        <div class="course-card" data-cat="eletro">
+          <div class="course-thumb course-thumb-bg-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v4M12 16h.01" />
+            </svg>
+            <span class="course-cat-badge">Eletrônica</span>
+          </div>
+          <div class="course-body">
+            <h3>Eletrônica: Introdução com Protoboard</h3>
+            <p>Primeiros passos em eletrônica analógica: resistores, LEDs, capacitores e transistores sem solda.</p>
+            <div class="course-meta">
+              <span><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg> 10h</span>
+              <span><svg viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                </svg> Iniciante</span>
+            </div>
+          </div>
+          <div class="course-footer">
+            <span class="course-unit">Centro Cívico • Boqueirão</span>
+            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg></a>
+          </div>
+        </div>
+
+        <div class="course-card" data-cat="prog">
+          <div class="course-thumb course-thumb-bg-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+              <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span class="course-cat-badge">Programação</span>
+          </div>
+          <div class="course-body">
+            <h3>Programação: Apps Android com App Inventor</h3>
+            <p>Crie seus próprios aplicativos para celular usando blocos visuais, sem precisar saber código.</p>
+            <div class="course-meta">
+              <span><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg> 16h</span>
+              <span><svg viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                </svg> Iniciante</span>
+            </div>
+          </div>
+          <div class="course-footer">
+            <span class="course-unit">Boa Vista • Pinheirinho</span>
+            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg></a>
+          </div>
+        </div>
+
+        <div class="course-card" data-cat="design">
+          <div class="course-thumb course-thumb-bg-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+              <circle cx="13.5" cy="6.5" r="2.5" />
+              <circle cx="6.5" cy="17.5" r="2.5" />
+              <path d="M13.5 9v1.5l-7 7" />
+            </svg>
+            <span class="course-cat-badge">Design</span>
+          </div>
+          <div class="course-body">
+            <h3>Design Digital: Introdução ao Inkscape</h3>
+            <p>Aprenda design vetorial do zero: criar logos, cartazes e arquivos para corte e impressão.</p>
+            <div class="course-meta">
+              <span><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg> 12h</span>
+              <span><svg viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                </svg> Iniciante</span>
+            </div>
+          </div>
+          <div class="course-footer">
+            <span class="course-unit">Centro Cívico • CIC</span>
+            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Pronto para <em>fazer acontecer?</em></h2>
+    <p>Cadastre-se gratuitamente e acesse todos os cursos e laboratórios da rede Curitiba Maker.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-primary">Criar minha conta</a>
+      <a href="#cursos" class="btn-outline">Ver todos os cursos</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo" style="display: inline-flex;">
+            <div style="width: 6px; height: 36px;"></div>
+            <span class="nav-logo-text">CURITIBA <span>MAKER</span></span>
+          </a>
+          <p>Rede municipal de laboratórios de fabricação digital da Prefeitura de Curitiba. Acesso gratuito para todos
+            os cidadãos.</p>
+        </div>
+        <div>
+          <h4>Institucional</h4>
+          <ul>
+            <li><a href="#sobre">Quem somos</a></li>
+            <li><a href="#como-participar">Como participar</a></li>
+            <li><a href="#unidades">Onde estamos</a></li>
+            <li><a href="#">Quem pode participar</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Conteúdo</h4>
+          <ul>
+            <li><a href="#cursos">Catálogo de cursos</a></li>
+            <li><a href="#">Calendário</a></li>
+            <li><a href="#">Projetos</a></li>
+            <li><a href="#">Agenda livre</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="mailto:maker@curitiba.pr.gov.br">maker@curitiba.pr.gov.br</a></li>
+            <li><a href="#">Ouvidoria</a></li>
+            <li><a href="#">Imprensa</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Curitiba Maker · Prefeitura Municipal de Curitiba</span>
+        <div class="footer-social">
+          <a href="#" title="Instagram">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" />
+            </svg>
+          </a>
+          <a href="#" title="Facebook">
+            <svg viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+            </svg>
+          </a>
+          <a href="#" title="YouTube">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M22.54 6.42a2.78 2.78 0 00-1.94-1.95C18.88 4 12 4 12 4s-6.88 0-8.6.47A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.94 1.95C5.12 20 12 20 12 20s6.88 0 8.6-.47a2.78 2.78 0 001.94-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.course-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.cat === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
