@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes da Unidade - Curitiba Maker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --orange: #f26522;
+      --orange-dark: #cc4a10;
+      --orange-light: #f58850;
+      --blue: #004f9f;
+      --blue-mid: #005fae;
+      --white: #FFFFFF;
+      --gray-light: #f4f5f7;
+      --gray-mid: #E8E6E1;
+      --gray-text: #555550;
+      --text-dark: #112e5a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* BARRA PMC */
+    .portal-pmc-topo-padrao-principal {
+      background: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+
+    .portal-pmc-topo-padrao-v-1 {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 40px;
+    }
+
+    .portal-pmc-topo-padrao-v-1-logo img {
+      height: 18px;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links ul {
+      list-style: none;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links li:not(:last-child)::after {
+      content: "|";
+      color: #bbbbbb;
+      font-size: 11px;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links a {
+      color: #333333;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 100%;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: white;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo-text span {
+      color: var(--orange-light);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      padding: 0 1rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    /* HERO SUBPAGE */
+    .hero-unit {
+      background: var(--blue);
+      padding: 4rem 2rem;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-unit-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.05;
+      background-image: repeating-linear-gradient(45deg, #fff 0, #fff 2px, transparent 2px, transparent 10px);
+    }
+
+    .hero-unit-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-unit-avatar {
+      width: 80px;
+      height: 80px;
+      background: var(--orange);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0 auto 1.5rem;
+      color: white;
+    }
+
+    .hero-unit h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-unit p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* CONTENT */
+    .content-area {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+    }
+
+    .main-col h2 {
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .main-col p.desc {
+      color: var(--gray-text);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      font-size: 1.05rem;
+    }
+
+    .equip-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .equip-card {
+      background: white;
+      border: 1px solid var(--gray-mid);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .equip-card h4 {
+      color: var(--blue);
+      font-size: 1.1rem;
+    }
+
+    .equip-card p {
+      color: var(--gray-text);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .side-col {
+      background: var(--gray-light);
+      border-radius: 16px;
+      padding: 2rem;
+      height: fit-content;
+    }
+
+    .info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .info-icon {
+      width: 24px;
+      height: 24px;
+      fill: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .info-item div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .info-item strong {
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .info-item span {
+      color: var(--gray-text);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .btn-action {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      background: var(--orange);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .btn-action:hover {
+      background: var(--orange-dark);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #112e5a;
+      padding: 3rem 2rem 2rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+
+    .footer-social a {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-social svg {
+      width: 16px;
+      height: 16px;
+      fill: rgba(255, 255, 255, 0.6);
+    }
+
+    /* ERROR BOUNDARY */
+    .error-state {
+      text-align: center;
+      padding: 5rem 2rem;
+      width: 100%;
+    }
+
+    @media (max-width: 800px) {
+      .content-area {
+        grid-template-columns: 1fr;
+      }
+
+      .equip-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-unit {
+        padding: 3rem 1.5rem;
+      }
+    }
+    /* GALLERY */
+    .gallery-container {
+      margin-top: 3rem;
+    }
+    .gallery-container h2 {
+      font-size: 1.5rem; color: var(--text-dark); margin-bottom: 1.5rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .gallery-grid img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--gray-mid);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .gallery-grid img:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BARRA PMC -->
+  <div class="portal-pmc-topo-padrao-principal">
+    <div class="portal-pmc-topo-padrao-v-1">
+      <div class="portal-pmc-topo-padrao-v-1-logo"><a href="https://www.curitiba.pr.gov.br"><img
+            src="https://cdn.ici.curitiba.org.br/scripts/portalpmc/topo/img/logoPMC.png"
+            alt="Prefeitura Municipal de Curitiba"></a></div>
+      <div class="portal-pmc-topo-padrao-v-1-links">
+        <ul>
+          <li class="portal-pmc-topo-padrao-v-1-primeiro-link"><a
+              href="https://www.curitiba.pr.gov.br/lei13460/">CURITIBA-OUVE</a></li>
+          <li><a href="https://156.curitiba.pr.gov.br/">156</a></li>
+          <li><a href="https://www.curitiba.pr.gov.br/leiacessoinformacao/"><span
+                class="portal-pmc-topo-padrao-v-1-acesso-informacao">Acesso à </span>informação</a></li>
+          <li><a href="https://www.curitiba.pr.gov.br/secretarias/">Secretarias</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVEGAÇÃO -->
+  <nav>
+    <div class="nav-inner">
+      <a href="curitiba-maker (1).html" class="nav-logo">
+        <span class="nav-logo-text">CURITIBA <span>MAKER</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="curitiba-maker (1).html#sobre">Quem somos</a></li>
+        <li><a href="curitiba-maker (1).html#unidades">Unidades</a></li>
+        <li><a href="curitiba-maker (1).html#cursos">Cursos</a></li>
+        <li><a href="curitiba-maker (1).html#como-participar">Como participar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="app-root">
+    <!-- Componente renderizado via JS -->
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© 2026 Curitiba Maker · Prefeitura Municipal de Curitiba</span>
+      <div class="footer-social">
+        <a href="#"><svg viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1" />
+          </svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const unidades = {
+      centro: {
+        nome: "Fab Lab Centro",
+        regiao: "Centro",
+        endereco: "Rua do Centro 100 - Centro",
+        horario: "Segunda a Sexta, 8h às 12h e 13h30 às 17h",
+        telefone: "(41) 3350-0000",
+        descricao: "O Fab Lab Centro é a unidade pioneira da rede Curitiba Maker, localizada no coração da cidade. Este espaço é dedicado a facilitar o acesso rápido a tecnologias de prototipagem e desenvolvimento de ideias. É um local perfeito tanto para estudantes quanto para pequenos empreendedores que precisam testar modelos físicos de seus projetos.",
+        avatar: "CT",
+        mapQuery: "Rua da Cidadania Matriz, Curitiba, PR",
+        equipamentos: [
+          { nome: "Impressão 3D FDM", desc: "Impressoras Cliever e Sethi3D com filamentos variados (PLA, PETG, ABS)." },
+          { nome: "Corte a Laser", desc: "Máquina de corte e gravação a laser 90x60cm, potência de 100W." },
+          { nome: "Router CNC", desc: "Equipamento CNC para corte de precisão em madeiras e resinas, área de 1x1m." },
+          { nome: "Bancada de Eletrônica", desc: "Bancada super equipada com osciloscópio, estadias de solda e kits Arduino." }
+        ]
+      },
+      cic: {
+        nome: "Fab Lab CIC",
+        regiao: "Cidade Industrial",
+        endereco: "Av. CIC, 100 — CIC",
+        horario: "Segunda a Sexta, 8h às 12h e 13h30 às 17h",
+        telefone: "(41) 3350-0000",
+        descricao: "Situado em uma das regiões mais produtivas de Curitiba, o Fab Lab CIC possui foco em marcenaria digital e tradicional, pequenos processos fabris e fabricação de produtos que misturam madeira, acrílico e tecidos.",
+        avatar: "CI",
+        mapQuery: "Rua da Cidadania CIC, Curitiba, PR",
+        equipamentos: [
+          { nome: "Impressão 3D", desc: "Impressoras de médio formato para componentes de reposição e peças plásticas." },
+          { nome: "Marcenaria", desc: "Serra tico-tico, tupia, lixadeiras e outras ferramentas essenciais de bancada." },
+          { nome: "Costura", desc: "Máquinas de costura retas e overlock para projetos têxteis (wearables, modelagem)." }
+        ]
+      },
+      boqueirao: {
+        nome: "Fab Lab Boqueirão",
+        regiao: "Boqueirão",
+        endereco: "Rua do Boqueirão, 100 — Boqueirão",
+        horario: "Segunda a Sexta, 8h às 12h e 13h30 às 17h",
+        telefone: "(41) 3350-0000",
+        descricao: "Reconhecido pelo seu foco em tecnologia da informação e automação, o Fab Lab Boqueirão atrai estudantes, desenvolvedores de hardware aberto e pessoas com interesse na internet das coisas (IoT).",
+        avatar: "BQ",
+        mapQuery: "Rua da Cidadania Boqueirão, Curitiba, PR",
+        equipamentos: [
+          { nome: "Corte e Gravação a Laser", desc: "Equipamento de precisão para acrílico, MDF e couro." },
+          { nome: "Eletrônica Aplicada", desc: "Kits de robótica educacional, placas de IoT (ESP32, Raspberry Pi) e sensores." },
+          { nome: "Robótica Estrutural", desc: "Ferramentas mecânicas leves para construção do chassi de projetos robóticos." }
+        ]
+      },
+      cajuru: {
+        nome: "Fab Lab Cajuru",
+        regiao: "Cajuru",
+        endereco: "Av. Prefeito Maurício Fruet, 2150 — Cajuru",
+        horario: "Segunda a Sexta, 8h às 12h e 13h30 às 17h",
+        telefone: "(41) 3221-2421",
+        descricao: "O Fab Lab Cajuru é um laboratório de prototipagem público da Prefeitura de Curitiba, oferecendo ferramentas inovadoras para todos os cidadãos. É vinculado ao Departamento de Inovação, Cidades Inteligentes e Inteligência Artificial da secretaria de Desenvolvimento Econômico, permitindo a execução praticamente de qualquer projeto de fabricação digital idealizado pela comunidade.",
+        avatar: "CJ",
+        mapQuery: "Av. Prefeito Maurício Fruet, 2150 — Cajuru, Curitiba, PR",
+        equipamentos: [
+          { nome: "Router CNC", desc: "Equipamento para corte e usinagem. Modelo Compact 1208." },
+          { nome: "Impressoras 3D", desc: "Impressões FDM em alta resolução. Modelos GTMAX Core A1." },
+          { nome: "Fresadora CNC", desc: "Usinagem de precisão em pequenos formatos com a Rolland MDX40A." },
+          { nome: "Scanner 3D", desc: "Digitalização geométrica de peças e objetos via Scanner Shinning SE." },
+          { nome: "Plotter de Recorte", desc: "Corte inteligente de vinil, adesivos e papel. Marca ZLTECH." },
+          { nome: "Bordadeira", desc: "Máquina programável para bordados digitais em tecido. Marca Singer." },
+          { nome: "Bancada Eletrônica", desc: "Bancada completa contendo Fonte Ajustável, Estação de Solda, Osciloscópio e insumos." }
+        ],
+        heroBg: "images/cajuru-hero.jpg",
+        fotos: ["images/cajuru-1.jpg", "images/cajuru-2.jpg", "images/cajuru-3.jpg", "images/cajuru-4.jpg"]
+      }
+    };
+
+    function renderError() {
+      return `
+        <div class="error-state">
+          <h2>Unidade não encontrada!</h2>
+          <p style="margin-top:1rem; color:var(--gray-text);">O Fab Lab que você buscou não existe ou não está mais ativo.</p>
+          <br>
+          <a href="curitiba-maker (1).html#unidades" style="color:var(--orange); font-weight:bold;">← Voltar e tentar novamente</a>
+        </div>
+      `;
+    }
+
+    function renderUnit(unidade) {
+      let equipamentosHTML = '';
+      unidade.equipamentos.forEach(eq => {
+        equipamentosHTML += `
+          <div class="equip-card">
+            <h4>${eq.nome}</h4>
+            <p>${eq.desc}</p>
+          </div>
+        `;
+      });
+
+      let galleryHTML = '';
+      if (unidade.fotos && unidade.fotos.length > 0) {
+        galleryHTML = `
+          <div class="gallery-container">
+            <h2>Fotos do Laboratório</h2>
+            <div class="gallery-grid">
+              ${unidade.fotos.map(foto => `<img src="${foto}" alt="Foto da unidade">`).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      const bgStyle = unidade.heroBg ? `background: linear-gradient(rgba(0, 79, 159, 0.85), rgba(0, 79, 159, 0.95)), url('${unidade.heroBg}'); background-size: cover; background-position: center;` : '';
+
+      return `
+        <section class="hero-unit" style="${bgStyle}">
+          ${!unidade.heroBg ? '<div class="hero-unit-pattern"></div>' : ''}
+          <div class="hero-unit-inner">
+            <div class="hero-unit-avatar">${unidade.avatar}</div>
+            <h1>${unidade.nome}</h1>
+            <p>${unidade.regiao}</p>
+          </div>
+        </section>
+
+        <section class="content-area">
+          <div class="main-col">
+            <h2>Sobre a Unidade</h2>
+            <p class="desc">${unidade.descricao}</p>
+
+            <h2>Equipamentos e Estrutura</h2>
+            <div class="equip-grid">
+              ${equipamentosHTML}
+            </div>
+
+            ${galleryHTML}
+          </div>
+          
+          <div class="side-col">
+            <ul class="info-list">
+              <li class="info-item">
+                <svg viewBox="0 0 24 24" class="info-icon">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="12" cy="10" r="3" fill="currentColor"/>
+                </svg>
+                <div>
+                  <strong>Endereço</strong>
+                  <span>${unidade.endereco}</span>
+                </div>
+              </li>
+              <li class="info-item">
+                <svg viewBox="0 0 24 24" class="info-icon">
+                  <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <div>
+                  <strong>Horário de Funcionamento</strong>
+                  <span>${unidade.horario}</span>
+                </div>
+              </li>
+              <li class="info-item">
+                <svg viewBox="0 0 24 24" class="info-icon">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.77 19.79 19.79 0 01.22 1.11 2 2 0 012.22 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <div>
+                  <strong>Contato</strong>
+                  <span>${unidade.telefone}</span>
+                </div>
+              </li>
+            </ul>
+
+            <div style="margin-bottom: 2rem;">
+              <iframe
+                src="https://maps.google.com/maps?q=${encodeURIComponent(unidade.mapQuery)}&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="220"
+                style="border:0; border-radius: 8px;"
+                allowfullscreen=""
+                loading="lazy">
+              </iframe>
+            </div>
+
+            <a href="curitiba-maker (1).html#cursos" class="btn-action">Ver cursos desta unidade</a>
+          </div>
+        </section>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const unitId = params.get('id');
+      const root = document.getElementById('app-root');
+
+      if (unitId && unidades[unitId]) {
+        root.innerHTML = renderUnit(unidades[unitId]);
+        document.title = unidades[unitId].nome + " - Curitiba Maker";
+      } else {
+        root.innerHTML = renderError();
+      }
+    });
+  </script>
+</body>
+
+</html>
