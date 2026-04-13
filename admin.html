@@ -112,40 +112,8 @@
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>001</td>
-              <td>Impressão 3D: Introdução ao FDM</td>
-              <td>Fabricação Digital</td>
-              <td>16h</td>
-              <td><span style="color:var(--blue); font-weight:bold;">Ativo</span></td>
-              <td class="cell-actions">
-                <button class="btn btn-secondary btn-sm" onclick="openModal()">Editar</button>
-                <button class="btn btn-secondary btn-sm" style="color:#d32f2f; border-color:#ffcdd2;">Excluir</button>
-              </td>
-            </tr>
-            <tr>
-              <td>002</td>
-              <td>Arduino: Introdução com Sensores</td>
-              <td>Eletrônica</td>
-              <td>20h</td>
-              <td><span style="color:var(--blue); font-weight:bold;">Ativo</span></td>
-              <td class="cell-actions">
-                <button class="btn btn-secondary btn-sm" onclick="openModal()">Editar</button>
-                <button class="btn btn-secondary btn-sm" style="color:#d32f2f; border-color:#ffcdd2;">Excluir</button>
-              </td>
-            </tr>
-            <tr>
-              <td>003</td>
-              <td>Programação: Apps Android</td>
-              <td>Programação</td>
-              <td>16h</td>
-              <td><span style="color:var(--gray-text);">Rascunho</span></td>
-              <td class="cell-actions">
-                <button class="btn btn-secondary btn-sm" onclick="openModal()">Editar</button>
-                <button class="btn btn-secondary btn-sm" style="color:#d32f2f; border-color:#ffcdd2;">Excluir</button>
-              </td>
-            </tr>
+          <tbody id="tabelaCursosBody">
+            <!-- Linhas populadas dinamicamente via Javascript -->
           </tbody>
         </table>
       </div>
@@ -156,33 +124,40 @@
   <div class="modal-overlay" id="formModal">
     <div class="modal">
       <h2 id="modalTitle">Cadastrar Curso</h2>
-      <form onsubmit="event.preventDefault(); closeModal();">
+      <form id="adminForm">
         <div class="form-group">
           <label>Nome do Curso</label>
-          <input type="text" placeholder="Ex: Robótica Básica" required>
+          <input type="text" id="cursoNome" placeholder="Ex: Robótica Básica" required>
         </div>
         <div class="form-group">
           <label>Categoria</label>
-          <select>
-            <option>Fabricação Digital</option>
-            <option>Eletrônica</option>
-            <option>Programação</option>
-            <option>Design</option>
+          <select id="cursoCategoria">
+            <option value="Fabricação Digital">Fabricação Digital</option>
+            <option value="Eletrônica">Eletrônica</option>
+            <option value="Programação">Programação</option>
+            <option value="Design">Design</option>
           </select>
         </div>
         <div style="display:flex; gap:10px;">
           <div class="form-group" style="flex:1;">
-            <label>Carga Horária (h)</label>
-            <input type="number" placeholder="Ex: 20">
+            <label>Carga Horária (ex: 20h)</label>
+            <input type="text" id="cursoCarga" placeholder="Ex: 20h" required>
           </div>
           <div class="form-group" style="flex:1;">
             <label>Nível</label>
-            <select>
-              <option>Iniciante</option>
-              <option>Básico</option>
-              <option>Avançado</option>
+            <select id="cursoNivel">
+              <option value="Iniciante">Iniciante</option>
+              <option value="Básico">Básico</option>
+              <option value="Avançado">Avançado</option>
             </select>
           </div>
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="cursoStatus">
+            <option value="Ativo">Ativo</option>
+            <option value="Rascunho">Rascunho</option>
+          </select>
         </div>
         <div class="modal-actions">
           <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
@@ -192,13 +167,175 @@
     </div>
   </div>
 
-  <script>
-    function openModal() {
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    // --- CONFIGURAÇÃO DO FIREBASE ---
+    // Você vai colar suas chaves do Firebase Console aqui para ativar a comunicação real.
+    // Enquanto estiver vazio, o painel usará o LocalStorage do navegador.
+    const firebaseConfig = {
+      // apiKey: "COLE_SUA_API_KEY",
+      // authDomain: "SEU_PROJETO.firebaseapp.com",
+      // projectId: "SEU_PROJETO",
+      // storageBucket: "SEU_PROJETO.appspot.com",
+      // messagingSenderId: "COLE_O_SENDER_ID",
+      // appId: "COLE_O_APP_ID"
+    };
+
+    const useFirebase = Object.keys(firebaseConfig).length > 0;
+    let db;
+    let firebaseCursosCollection;
+    
+    if (useFirebase) {
+      const app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      firebaseCursosCollection = collection(db, "cursos");
+    }
+
+    const tbody = document.getElementById('tabelaCursosBody');
+    let currentEditId = null;
+
+    // Funções Globais (acessíveis pelo HTML inline onclick)
+    window.openModal = function(id = null, cursoData = null) {
+      currentEditId = id;
+      document.getElementById('modalTitle').textContent = id ? "Editar Curso" : "Cadastrar Curso";
       document.getElementById('formModal').style.display = 'flex';
-    }
-    function closeModal() {
+      
+      if (cursoData) {
+        document.getElementById('cursoNome').value = cursoData.nome || '';
+        document.getElementById('cursoCategoria').value = cursoData.categoria || 'Fabricação Digital';
+        document.getElementById('cursoCarga').value = cursoData.carga || '';
+        document.getElementById('cursoNivel').value = cursoData.nivel || 'Iniciante';
+        document.getElementById('cursoStatus').value = cursoData.status || 'Ativo';
+      } else {
+        document.getElementById('adminForm').reset();
+      }
+    };
+
+    window.closeModal = function() {
       document.getElementById('formModal').style.display = 'none';
+      currentEditId = null;
+    };
+
+    window.deleteCurso = async function(id) {
+      if (!confirm("Tem certeza que deseja excluir este curso?")) return;
+      
+      if (useFirebase) {
+        try {
+          await deleteDoc(doc(db, "cursos", id));
+        } catch(e) { 
+          console.error(e); 
+          alert("Erro ao excluir do Firebase."); 
+        }
+      } else {
+        let dados = JSON.parse(localStorage.getItem('cursos_db') || '[]');
+        dados = dados.filter(c => c.id !== id);
+        localStorage.setItem('cursos_db', JSON.stringify(dados));
+      }
+      carregarDados();
+    };
+
+    async function carregarDados() {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Carregando...</td></tr>';
+      let cursosList = [];
+
+      if (useFirebase) {
+        try {
+          const querySnapshot = await getDocs(firebaseCursosCollection);
+          querySnapshot.forEach((doc) => {
+            cursosList.push({ id: doc.id, ...doc.data() });
+          });
+        } catch (e) {
+          console.error("Erro ao ler Firebase: ", e);
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color: red;">Erro ao carregar dados do Firebase. Veja o console.</td></tr>';
+          return;
+        }
+      } else {
+        // Fallback para LocalStorage se Firebase não estiver configurado
+        cursosList = JSON.parse(localStorage.getItem('cursos_db') || '[]');
+        if (cursosList.length === 0) {
+          cursosList = [
+            { id: "001", nome: "Impressão 3D: Introdução ao FDM", categoria: "Fabricação Digital", carga: "16h", nivel: "Básico", status: "Ativo" },
+            { id: "002", nome: "Arduino: Introdução com Sensores", categoria: "Eletrônica", carga: "20h", nivel: "Iniciante", status: "Ativo" }
+          ];
+          localStorage.setItem('cursos_db', JSON.stringify(cursosList));
+        }
+      }
+      renderTable(cursosList);
     }
+
+    function renderTable(dados) {
+      tbody.innerHTML = '';
+      if (dados.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Nenhum curso encontrado.</td></tr>';
+        return;
+      }
+
+      dados.forEach(curso => {
+        const tr = document.createElement('tr');
+        const statusColor = curso.status === 'Ativo' ? 'var(--blue)' : 'var(--gray-text)';
+        const safeData = JSON.stringify(curso).replace(/'/g, "&apos;").replace(/"/g, "&quot;");
+        
+        tr.innerHTML = `
+          <td>${curso.id.substring(0,6)}...</td>
+          <td>${curso.nome}</td>
+          <td>${curso.categoria}</td>
+          <td>${curso.carga}</td>
+          <td><span style="color:${statusColor}; font-weight:bold;">${curso.status || 'Ativo'}</span></td>
+          <td class="cell-actions">
+            <button class="btn btn-secondary btn-sm" onclick="openModal('${curso.id}', ${safeData})">Editar</button>
+            <button class="btn btn-secondary btn-sm" style="color:#d32f2f; border-color:#ffcdd2;" onclick="deleteCurso('${curso.id}')">Excluir</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Formulário Submit (Criar ou Atualizar)
+    document.getElementById('adminForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const novoCurso = {
+        nome: document.getElementById('cursoNome').value,
+        categoria: document.getElementById('cursoCategoria').value,
+        carga: document.getElementById('cursoCarga').value,
+        nivel: document.getElementById('cursoNivel').value,
+        status: document.getElementById('cursoStatus').value
+      };
+
+      if (useFirebase) {
+        try {
+          if (currentEditId) {
+            await updateDoc(doc(db, "cursos", currentEditId), novoCurso);
+          } else {
+            await addDoc(firebaseCursosCollection, novoCurso);
+          }
+        } catch(e) {
+          console.error("Erro salvando no Firebase", e);
+          alert("Erro ao salvar no banco Firebase");
+          return;
+        }
+      } else {
+        let dados = JSON.parse(localStorage.getItem('cursos_db') || '[]');
+        if (currentEditId) {
+          const index = dados.findIndex(c => c.id === currentEditId);
+          if (index !== -1) dados[index] = { ...novoCurso, id: currentEditId };
+        } else {
+          novoCurso.id = "local_" + new Date().getTime();
+          dados.push(novoCurso);
+        }
+        localStorage.setItem('cursos_db', JSON.stringify(dados));
+      }
+
+      closeModal();
+      carregarDados();
+    });
+
+    // Início
+    document.addEventListener("DOMContentLoaded", () => {
+      carregarDados();
+    });
   </script>
 </body>
 </html>

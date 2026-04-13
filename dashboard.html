@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curitiba Maker - Dashboard BI</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js para os gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      --blue-pmc: #004a92;
+      --blue-action: #1a73e8;
+      --blue-light: #e6f2fb;
+      --orange: #f26522;
+      --yellow: #FFD700;
+      
+      --bg-color: #f4f5f7;
+      --card-bg: #ffffff;
+      --text-dark: #333333;
+      --text-muted: #666666;
+      --sidebar-width: 250px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* SIDEBAR (Estilo Looker/Power BI) */
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--blue-pmc);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .sidebar-header h2 {
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.5px;
+    }
+    
+    .sidebar-header p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+      margin-top: 5px;
+    }
+
+    .sidebar-nav {
+      padding-top: 1rem;
+      flex: 1;
+    }
+
+    .sidebar-nav ul { list-style: none; }
+    .sidebar-nav li { margin-bottom: 5px; }
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      padding: 12px 1.5rem;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    
+    .sidebar-nav a:hover, .sidebar-nav a.active {
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+      border-left: 4px solid var(--orange);
+    }
+    
+    .sidebar-nav a svg { margin-right: 15px; width: 20px; }
+
+    /* CONTENT AREA */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      height: 70px;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--blue-pmc);
+    }
+
+    .topbar-actions {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    
+    .btn-export {
+      background: var(--blue-light);
+      color: var(--blue-action);
+      border: 1px solid var(--blue-action);
+      padding: 8px 16px;
+      border-radius: 50px; /* Estilo PMC */
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-export:hover {
+      background: var(--blue-action);
+      color: white;
+    }
+
+    /* DASHBOARD CONTENT */
+    .dashboard-container {
+      padding: 2rem;
+    }
+
+    /* KPIs */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .kpi-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kpi-card h3 {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .kpi-card .value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--blue-pmc);
+      margin-top: 10px;
+    }
+
+    .kpi-card .trend {
+      font-size: 0.8rem;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    .trend.up { color: #2c9447; } /* Verde positivo PMC style */
+
+    /* GRÁFICOS GRID */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .chart-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart-card.wide {
+      grid-column: span 2;
+    }
+
+    .chart-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 300px; /* Altura padrão para os gráficos */
+      width: 100%;
+    }
+
+    @media (max-width: 1024px) {
+      .charts-grid { grid-template-columns: 1fr; }
+      .chart-card.wide { grid-column: span 1; }
+    }
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .main-content { margin-left: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Curitiba Maker</h2>
+      <p>Data Intel & Analytics</p>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a href="#" class="active">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+            Visão Geral
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            Demografia
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            Localização
+          </a>
+        </li>
+        <li>
+          <a href="curitiba-maker (1).html" style="margin-top: 2rem; color: #a9c6e2;">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Voltar ao Site
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-title">Relatório de Desempenho (Abril 2026)</div>
+      <div class="topbar-actions">
+        <select style="padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-family: Montserrat;">
+          <option>Últimos 30 Dias</option>
+          <option>Este Ano</option>
+        </select>
+        <button class="btn-export">
+          <svg width="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          Exportar PDF
+        </button>
+      </div>
+    </header>
+
+    <div class="dashboard-container">
+      
+      <!-- KPIs -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <h3>Acessos Totais</h3>
+          <div class="value">45.204</div>
+          <div class="trend up">▲ +12.5% em relação ao mês anterior</div>
+        </div>
+        <div class="kpi-card">
+          <h3>Novos Inscritos (Cursos)</h3>
+          <div class="value">1.890</div>
+          <div class="trend up">▲ +8.2% via "Liceus"</div>
+        </div>
+        <div class="kpi-card">
+          <h3>Idade Média</h3>
+          <div class="value">28 anos</div>
+          <div class="trend" style="color:var(--text-muted)">Estável</div>
+        </div>
+        <div class="kpi-card">
+          <h3>Tempo Médio na Página</h3>
+          <div class="value">04:15</div>
+          <div class="trend up">▲ +30s (Maior engajamento nas fotos)</div>
+        </div>
+      </div>
+
+      <!-- CHARTS -->
+      <div class="charts-grid">
+        
+        <div class="chart-card">
+          <h3>Distribuição por Sexo/Gênero</h3>
+          <div class="chart-container">
+            <canvas id="genderChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Faixa Etária dos Usuários</h3>
+          <div class="chart-container">
+            <canvas id="ageChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Acessos por Regional (Localização)</h3>
+          <div class="chart-container">
+            <canvas id="locationChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Mapa de Calor: Áreas Mais Clicadas</h3>
+          <div class="chart-container">
+            <canvas id="heatmapChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Configuração base PMC (Cores)
+    const pmcBlue = '#004a92';
+    const pmcAction = '#1a73e8';
+    const pmcOrange = '#f26522';
+    const pmcYellow = '#FFD700';
+    const pmcLight = '#82caec';
+
+    // Defaults do Chart.js para ficar com tipografia Curitiba Maker
+    Chart.defaults.font.family = "'Montserrat', sans-serif";
+    Chart.defaults.color = '#666';
+    Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(0, 74, 146, 0.9)'; // Fundo do tooltip azul escuro
+    Chart.defaults.plugins.tooltip.padding = 12;
+
+    // 1. Gráfico de Sexo (Doughnut)
+    const ctxGender = document.getElementById('genderChart').getContext('2d');
+    new Chart(ctxGender, {
+      type: 'doughnut',
+      data: {
+        labels: ['Feminino', 'Masculino', 'Outros', 'Não Declarado'],
+        datasets: [{
+          data: [48, 45, 5, 2],
+          backgroundColor: [pmcAction, pmcBlue, pmcOrange, '#e0e0e0'],
+          borderWidth: 0,
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom' }
+        },
+        cutout: '65%' // Aspecto clean de anel (estilo PowerBI)
+      }
+    });
+
+    // 2. Gráfico de Idade (Bar)
+    const ctxAge = document.getElementById('ageChart').getContext('2d');
+    new Chart(ctxAge, {
+      type: 'bar',
+      data: {
+        labels: ['13-17', '18-24', '25-34', '35-44', '45-54', '55+'],
+        datasets: [{
+          label: 'Acessos por faixa etária',
+          data: [3000, 15000, 18500, 6000, 1500, 1204],
+          backgroundColor: pmcBlue,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { borderDash: [2, 4], color: '#eee' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    // 3. Gráfico de Localização / Regional (Doughnut ou Polar/Pie)
+    const ctxLocation = document.getElementById('locationChart').getContext('2d');
+    new Chart(ctxLocation, {
+      type: 'pie',
+      data: {
+        labels: ['Cajuru', 'Matriz', 'CIC', 'Boqueirão', 'Boa Vista', 'Outras'],
+        datasets: [{
+          data: [35, 20, 18, 12, 10, 5],
+          backgroundColor: [
+            pmcBlue,         // Cajuru destaca
+            pmcAction,       // Matriz
+            pmcOrange,       // CIC
+            pmcYellow,       // Boqueirão
+            pmcLight,        // Boa Vista
+            '#cccccc'        // Outras
+          ],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'right' }
+        }
+      }
+    });
+
+    // 4. "Mapa de Calor" de Zonas do Site (Barra Horizontal)
+    const ctxHeatmap = document.getElementById('heatmapChart').getContext('2d');
+    new Chart(ctxHeatmap, {
+      type: 'bar',
+      data: {
+        labels: [
+          'Catálogo de Cursos', 
+          'Páginas das Unidades', 
+          'Top Bar (Pesquisa)', 
+          'Como Participar', 
+          'Banner Principal', 
+          'Rodapé (Contato)'
+        ],
+        datasets: [{
+          label: 'Cliques (Heatmap)',
+          data: [15200, 13150, 7800, 5200, 2900, 954],
+          // Usando uma escala de calor visual (do laranja quente pro azul frio)
+          backgroundColor: [
+            '#e65610',  // Mais quente (Cursos)
+            '#fa843e',  // Quente (Unidades)
+            '#f2a96b',  // Amorno (Pesquisa)
+            '#82caec',  // Fresco
+            '#1a73e8',  // Frio
+            '#004a92'   // Gelo (Menos acessado)
+          ],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y', // Inverte para barra horizontal
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { beginAtZero: true, grid: { borderDash: [2, 4], color: '#eee' } },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

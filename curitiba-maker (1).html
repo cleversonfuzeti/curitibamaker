@@ -198,8 +198,11 @@
 
     /* HERO */
     .hero {
-      background: var(--blue);
-      min-height: 540px;
+      background: linear-gradient(rgba(0, 79, 159, 0.8), rgba(0, 79, 159, 0.9)), url('images/cajuru-hero.jpg');
+      background-size: cover;
+      background-position: center;
+      aspect-ratio: 1920 / 667;
+      min-height: 500px;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -427,6 +430,7 @@
     /* SECTIONS COMMON */
     section {
       padding: 5rem 2rem;
+      scroll-margin-top: 64px;
     }
 
     .section-inner {
@@ -470,7 +474,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
-      align-items: center;
+      align-items: flex-start;
     }
 
     .about-visual {
@@ -728,7 +732,7 @@
     }
 
     .course-card:hover {
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.09);
+      box-shadow: 0 8px 30px rgba(0, 79, 159, 0.12);
       transform: translateY(-3px);
     }
 
@@ -751,8 +755,8 @@
       opacity: 0.9;
     }
 
-    .course-thumb-bg-orange {
-      background: linear-gradient(135deg, #e65610, #fa843e);
+    .course-thumb-bg-lightblue {
+      background: linear-gradient(135deg, #0f7eda, #3badf7);
     }
 
     .course-thumb-bg-blue {
@@ -1076,6 +1080,7 @@
         <li><a href="#sobre">Quem somos</a></li>
         <li><a href="#unidades">Unidades</a></li>
         <li><a href="#cursos">Cursos</a></li>
+        <li><a href="projetos.html">Projetos</a></li>
         <li><a href="#como-participar">Como participar</a></li>
       </ul>
     </div>
@@ -1085,7 +1090,7 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-content">
-        <div class="hero-badge"><span></span>Laboratório de prototipagem público</div>
+        <div class="hero-badge"><span></span>Laboratórios públicos de prototipagem</div>
         <h1>Criatividade. Aprendizado.<br><em>Inovação.</em></h1>
         <p><b>Democratizando</b> o acesso à tecnologia e ao conhecimento para todos os curitibanos.</p>
         <div class="hero-actions">
@@ -1166,19 +1171,20 @@
       <div class="about-grid">
         <div>
           <span class="section-label">Quem somos</span>
-          <h2 class="section-title">Laboratórios de fabricação digital para toda a cidade</h2>
+          <h2 class="section-title">Inovação para todos!</h2>
           <p class="section-sub">O Curitiba Maker é um Programa da Secretaria de Desenvolvimento Econômico e Inovação,
-            que conta com uma rede de espaços públicos de inovação onde qualquer cidadão pode
+            que conta com Fab Labs (Laboratórios de fabricação digital) públicos, onde qualquer cidadão pode
             aprender tecnologia, desenvolver projetos e acessar equipamentos profissionais de forma gratuita.</p>
 
-          <div id="como-participar">
-            <span class="section-label" style="margin-top: 2rem; display: block;">Como participar</span>
+          <div id="como-participar" style="margin-top: 8rem; scroll-margin-top: 80px;">
+            <span class="section-label" style="display: block;">Como participar</span>
             <ul class="about-steps">
               <li>
                 <div class="step-num">1</div>
                 <div class="step-text">
-                  <strong>Cadastre-se gratuitamente</strong>
-                  <span>Use seus dados do E-Cidadão Curitiba para acessar a plataforma em segundos.</span>
+                  <strong>Submeta seu projeto</strong>
+                  <span>No Fab Lab você pode desenvolver o seu projeto gratuitamente. Submeta seu projeto para análise e
+                    agendamento de atendimento.</span>
                 </div>
               </li>
               <li>
@@ -1192,7 +1198,7 @@
                 <div class="step-num">3</div>
                 <div class="step-text">
                   <strong>Faça sua inscrição</strong>
-                  <span>Inscreva-se em turmas abertas e receba a confirmação por e-mail ou SMS.</span>
+                  <span>Inscreva-se em turmas abertas e amplie o seu conhecimento.</span>
                 </div>
               </li>
               <li>
@@ -1449,7 +1455,7 @@
       <div class="courses-grid" id="courses-grid">
 
         <div class="course-card" data-cat="fabricacao">
-          <div class="course-thumb course-thumb-bg-orange">
+          <div class="course-thumb course-thumb-bg-lightblue">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
               <path d="M6 3h12l3 9-3 3H6l-3-3z" />
               <path d="M3 12h18M12 3v18" />
@@ -1458,7 +1464,7 @@
           </div>
           <div class="course-body">
             <h3>Impressão 3D: Introdução ao FDM</h3>
-            <p>Aprenda os fundamentos da impressão 3D FDM, da modelagem ao produto final com filamentos PLA e PETG.</p>
+            <p>Aprenda os fundamentos da impressão 3D FDM, da modelagem ao produto final.</p>
             <div class="course-meta">
               <span><svg viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10" />
@@ -1479,7 +1485,7 @@
         </div>
 
         <div class="course-card" data-cat="fabricacao">
-          <div class="course-thumb course-thumb-bg-orange">
+          <div class="course-thumb course-thumb-bg-lightblue">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
               <path
                 d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
@@ -1502,14 +1508,15 @@
           </div>
           <div class="course-footer">
             <span class="course-unit">Boqueirão • Pinheirinho</span>
-            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank"
+              class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg></a>
           </div>
         </div>
 
         <div class="course-card" data-cat="eletro">
-          <div class="course-thumb course-thumb-bg-orange">
+          <div class="course-thumb course-thumb-bg-lightblue">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
             </svg>
@@ -1531,14 +1538,15 @@
           </div>
           <div class="course-footer">
             <span class="course-unit">Todas as unidades</span>
-            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank"
+              class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg></a>
           </div>
         </div>
 
         <div class="course-card" data-cat="eletro">
-          <div class="course-thumb course-thumb-bg-orange">
+          <div class="course-thumb course-thumb-bg-lightblue">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
               <circle cx="12" cy="12" r="10" />
               <path d="M12 8v4M12 16h.01" />
@@ -1561,14 +1569,15 @@
           </div>
           <div class="course-footer">
             <span class="course-unit">Centro Cívico • Boqueirão</span>
-            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank"
+              class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg></a>
           </div>
         </div>
 
         <div class="course-card" data-cat="prog">
-          <div class="course-thumb course-thumb-bg-orange">
+          <div class="course-thumb course-thumb-bg-lightblue">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
               <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -1590,14 +1599,15 @@
           </div>
           <div class="course-footer">
             <span class="course-unit">Boa Vista • Pinheirinho</span>
-            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank"
+              class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg></a>
           </div>
         </div>
 
         <div class="course-card" data-cat="design">
-          <div class="course-thumb course-thumb-bg-orange">
+          <div class="course-thumb course-thumb-bg-lightblue">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
               <circle cx="13.5" cy="6.5" r="2.5" />
               <circle cx="6.5" cy="17.5" r="2.5" />
@@ -1621,7 +1631,8 @@
           </div>
           <div class="course-footer">
             <span class="course-unit">Centro Cívico • CIC</span>
-            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
+            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank"
+              class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg></a>
           </div>
@@ -1633,11 +1644,11 @@
 
   <!-- CTA -->
   <div class="cta-section">
-    <h2>Pronto para <em>fazer acontecer?</em></h2>
-    <p>Cadastre-se gratuitamente e acesse todos os cursos e laboratórios da rede Curitiba Maker.</p>
+    <h2>Pronto para <em>prototipar?</em></h2>
+    <p>Submeta seu projeto para análise.</p>
     <div class="cta-btns">
-      <a href="#" class="btn-primary">Criar minha conta</a>
-      <a href="#cursos" class="btn-outline">Ver todos os cursos</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSflrWY7eTtN5j8uNsIQf175RC8Fyr1Dc1ZgvVXwqmfmFdDypA/viewform"
+        class="btn-primary" target="_blank">SUBMETER PROJETO</a>
     </div>
   </div>
 
@@ -1647,11 +1658,10 @@
       <div class="footer-top">
         <div class="footer-brand">
           <a href="#" class="nav-logo" style="display: inline-flex;">
-            <div style="width: 6px; height: 36px;"></div>
+
             <span class="nav-logo-text">CURITIBA <span>MAKER</span></span>
           </a>
-          <p>Rede municipal de laboratórios de fabricação digital da Prefeitura de Curitiba. Acesso gratuito para todos
-            os cidadãos.</p>
+          <p>Laboratórios públicos de prototipagem da Prefeitura de Curitiba. <br>Inovação para todos.</p>
         </div>
         <div>
           <h4>Institucional</h4>
@@ -1659,6 +1669,7 @@
             <li><a href="#sobre">Quem somos</a></li>
             <li><a href="#como-participar">Como participar</a></li>
             <li><a href="#unidades">Onde estamos</a></li>
+            <li><a href="projetos.html">Galeria de Projetos</a></li>
             <li><a href="#">Quem pode participar</a></li>
           </ul>
         </div>

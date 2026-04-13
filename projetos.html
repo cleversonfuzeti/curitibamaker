@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projetos da Comunidade | Curitiba Maker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --orange: #f26522;
+      --orange-dark: #cc4a10;
+      --orange-light: #f58850;
+      --blue: #004f9f;
+      --blue-mid: #005fae;
+      --blue-light: #0073cc;
+      --white: #FFFFFF;
+      --gray-light: #f4f5f7;
+      --gray-mid: #E8E6E1;
+      --gray-text: #555550;
+      --text-dark: #112e5a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-dark);
+      background: var(--gray-light);
+      /* Background cinza pra sobressair os cards brancos */
+    }
+
+    /* BARRA MENU UNICO PMC */
+    .portal-pmc-topo-padrao-principal {
+      background: #f2f2f2;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .portal-pmc-topo-padrao-v-1 {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 40px;
+    }
+
+    .portal-pmc-topo-padrao-v-1-logo img {
+      height: 18px;
+      display: block;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links li:not(:last-child)::after {
+      content: "|";
+      color: #bbbbbb;
+      font-size: 11px;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links a {
+      color: #333333;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .portal-pmc-topo-padrao-v-1-links a:hover {
+      color: #004f9f;
+      text-decoration: underline;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 100%;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    .nav-logo-text {
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: white;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo-text span {
+      color: var(--orange-light);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      padding: 0 1rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+      border-bottom-color: var(--orange);
+    }
+
+    /* HERO PROJETOS */
+    .hero-projetos {
+      background: linear-gradient(135deg, var(--blue), var(--text-dark));
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+      border-bottom: 5px solid var(--orange);
+    }
+
+    .hero-projetos h1 {
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    .hero-projetos p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+      line-height: 1.6;
+    }
+
+    .btn-create {
+      background: var(--orange);
+      color: white;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .btn-create:hover {
+      background: var(--orange-dark);
+      transform: translateY(-2px);
+    }
+
+    /* GALLERY LAYOUT */
+    .gallery-section {
+      max-width: 1100px;
+      margin: -2rem auto 5rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .filters-toolbar {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 1px solid var(--gray-mid);
+      background: transparent;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--gray-text);
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .filter-btn.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: white;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    /* PROJECT CARD */
+    .project-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--gray-mid);
+      transition: all 0.3s cubic-bezier(0.1, 0.7, 0.1, 1);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 79, 159, 0.1);
+      border-color: rgba(0, 79, 159, 0.2);
+    }
+
+    .project-card.hidden {
+      display: none !important;
+    }
+
+    .card-img-container {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: var(--gray-mid);
+      overflow: hidden;
+    }
+
+    .card-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .card-img-container img {
+      transform: scale(1.05);
+    }
+
+    /* Gradient overlay that appears on hover */
+    .card-img-container::after {
+      content: "Ver Projeto";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 79, 159, 0.7);
+      color: white;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover .card-img-container::after {
+      opacity: 1;
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 2;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--gray-text);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 15px;
+      border-top: 1px solid var(--gray-light);
+    }
+
+    .card-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .card-author svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--orange);
+    }
+
+    .card-unit {
+      font-size: 0.75rem;
+      color: var(--blue-mid);
+      background: var(--blue-pale);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    /* MODAL MÁGICO (O Pop-up Integrado) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 25, 50, 0.8);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      border-radius: 20px;
+      overflow: hidden;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+      transform: translateY(30px);
+      transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      z-index: 1001;
+      /* Fica sobre a foto grande */
+      transition: all 0.2s;
+    }
+
+    .btn-close:hover {
+      background: var(--orange);
+      color: white;
+      transform: rotate(90deg);
+    }
+
+    .btn-close svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Corpo Modal */
+    .modal-hero {
+      width: 100%;
+      height: 350px;
+      background: #ddd;
+      position: relative;
+    }
+
+    .modal-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-body {
+      padding: 3rem;
+    }
+
+    .modal-header {
+      margin-bottom: 2rem;
+    }
+
+    .modal-badges {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .m-badge-tech {
+      background: var(--orange-pale);
+      color: var(--orange-dark);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .m-badge-unit {
+      background: var(--blue);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .modal-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .modal-author-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-bottom: 1px solid var(--gray-mid);
+      padding-bottom: 1.5rem;
+    }
+
+    .author-avatar {
+      width: 45px;
+      height: 45px;
+      background: var(--blue-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .author-details p {
+      margin: 0;
+    }
+
+    .author-details .name {
+      font-weight: 700;
+      color: var(--text-dark);
+      font-size: 1.1rem;
+    }
+
+    .author-details .date {
+      font-size: 0.85rem;
+      color: var(--gray-text);
+    }
+
+    .modal-description {
+      margin-top: 2rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--gray-text);
+    }
+
+    .modal-description p {
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-cta-box {
+      background: var(--blue-pale);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+      border: 1px dashed var(--blue-mid);
+    }
+
+    .modal-cta-box h4 {
+      font-size: 1.3rem;
+      color: var(--blue);
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .modal-cta-box p {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--text-dark);
+      padding: 5rem 2rem 2rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.83rem;
+      line-height: 1.7;
+      margin-top: 1rem;
+      max-width: 260px;
+    }
+
+    footer h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    footer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    footer ul a {
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      font-size: 0.83rem;
+      transition: color 0.2s;
+    }
+
+    footer ul a:hover {
+      color: var(--orange-light);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+
+    .footer-social a {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .footer-social a:hover {
+      background: var(--orange);
+    }
+
+    .footer-social svg {
+      width: 16px;
+      height: 16px;
+      fill: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-social a:hover svg {
+      fill: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BARRA PMC -->
+  <div class="portal-pmc-topo-padrao-principal">
+    <div class="portal-pmc-topo-padrao-v-1">
+      <div class="portal-pmc-topo-padrao-v-1-logo">
+        <a href="https://www.curitiba.pr.gov.br/" target="_blank" title="Prefeitura de Curitiba">
+          <img src="https://cdn.ici.curitiba.org.br/scripts/portalpmc/topo/img/logoPMC.png" alt="Prefeitura Municipal de Curitiba">
+        </a>
+      </div>
+      <div class="portal-pmc-topo-padrao-v-1-links">
+        <ul>
+          <li><a href="https://www.curitiba.pr.gov.br/" target="_blank">Portal da Prefeitura</a></li>
+          <li><a href="https://156.curitiba.pr.gov.br/" target="_blank">Central 156</a></li>
+          <li><a href="https://www.curitiba.pr.gov.br/servicos" target="_blank">Guia de Serviços</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVEGAÇÃO CURITIBA MAKER -->
+  <nav>
+    <div class="nav-inner">
+      <a href="curitiba-maker (1).html" class="nav-logo">
+        <span class="nav-logo-text">CURITIBA <span>MAKER</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="curitiba-maker (1).html#sobre">Quem somos</a></li>
+        <li><a href="curitiba-maker (1).html#unidades">Unidades</a></li>
+        <li><a href="curitiba-maker (1).html#cursos">Cursos</a></li>
+        <li><a href="projetos.html" style="color:white; border-bottom: 3px solid #f26522; font-weight:600;">Projetos</a>
+        </li>
+        <li><a href="curitiba-maker (1).html#como-participar">Como participar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CAPA -->
+  <header class="hero-projetos">
+    <h1>Invenções Nascidas Aqui.</h1>
+    <p>Nossa galeria de projetos da comunidade Curitiba Maker. Conheça as ideias fantásticas esculpidas a laser,
+      programadas com código e impressas em 3D pelos cidadãos nos laboratórios públicos.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSflrWY7eTtN5j8uNsIQf175RC8Fyr1Dc1ZgvVXwqmfmFdDypA/viewform"
+      target="_blank" class="btn-create">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12h14"></path>
+      </svg>
+      Submeta seu Projeto
+    </a>
+  </header>
+
+  <!-- GALERIA DE PROJETOS -->
+  <section class="gallery-section">
+
+    <div class="filters-toolbar">
+      <button class="filter-btn active" data-filter="todos">Todos</button>
+      <button class="filter-btn" data-filter="3d">Impressão 3D</button>
+      <button class="filter-btn" data-filter="laser">Corte a Laser</button>
+      <button class="filter-btn" data-filter="eletro">Eletrônica / IoT</button>
+      <button class="filter-btn" data-filter="marcenaria">Marcenaria</button>
+    </div>
+
+    <!-- Container Dinâmico -->
+    <div class="projects-grid" id="projects-grid">
+      <!-- Cards serão injetados via JS -->
+    </div>
+  </section>
+
+  <!-- MODAL / LIGHTBOX DE PROJETO -->
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal-content">
+      <button class="btn-close" onclick="fecharProjeto()" title="Fechar">
+        <svg viewBox="0 0 24 24">
+          <path d="M18 6L6 18M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="modal-hero">
+        <img id="m-foto" src="" alt="Imagem do Projeto">
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-header">
+          <div class="modal-badges">
+            <span class="m-badge-tech" id="m-tech">Categoria</span>
+            <span class="m-badge-unit" id="m-unit">Unidade</span>
+          </div>
+          <h2 class="modal-title" id="m-title">Nome do Projeto Gigante da Silva</h2>
+        </div>
+
+        <div class="modal-author-info">
+          <div class="author-avatar" id="m-avatar">JD</div>
+          <div class="author-details">
+            <p class="name" id="m-author">Nome do Cidadão Maker</p>
+            <p class="date" id="m-date">Finalizado em: Maio 2026</p>
+          </div>
+        </div>
+
+        <div class="modal-description" id="m-desc">
+          <!-- Texto injetado -->
+        </div>
+
+        <div class="modal-cta-box">
+          <h4>Inspirado por esta invenção?</h4>
+          <p>Você também tem uma ideia que pode resolver um problema na sua comunidade usando nossos equipamentos?</p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSflrWY7eTtN5j8uNsIQf175RC8Fyr1Dc1ZgvVXwqmfmFdDypA/viewform"
+            target="_blank" class="btn-create" style="margin: 0; padding: 10px 20px; font-size:0.9rem;">Submeta e
+            Construa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ ORIGINAL -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="curitiba-maker (1).html" class="nav-logo" style="display: inline-flex;">
+            <span class="nav-logo-text" style="color:#004f9f;">CURITIBA <span>MAKER</span></span>
+          </a>
+          <p>Laboratórios públicos de prototipagem da Prefeitura de Curitiba. <br>Inovação para todos.</p>
+        </div>
+        <div>
+          <h4>Institucional</h4>
+          <ul>
+            <li><a href="curitiba-maker (1).html#sobre">Quem somos</a></li>
+            <li><a href="curitiba-maker (1).html#como-participar">Como participar</a></li>
+            <li><a href="curitiba-maker (1).html#unidades">Onde estamos</a></li>
+            <li><a href="projetos.html">Galeria de Projetos</a></li>
+            <li><a href="#">Quem pode participar</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Conteúdo</h4>
+          <ul>
+            <li><a href="curitiba-maker (1).html#cursos">Catálogo de cursos</a></li>
+            <li><a href="#">Calendário</a></li>
+            <li><a href="#">Projetos</a></li>
+            <li><a href="#">Agenda livre</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="mailto:maker@curitiba.pr.gov.br">maker@curitiba.pr.gov.br</a></li>
+            <li><a href="#">Ouvidoria</a></li>
+            <li><a href="#">Imprensa</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Curitiba Maker — Prefeitura Municipal de Curitiba</span>
+        <div class="footer-social">
+          <a href="#" title="Instagram">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" />
+            </svg>
+          </a>
+          <a href="#" title="Facebook">
+            <svg viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+            </svg>
+          </a>
+          <a href="#" title="YouTube">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M22.54 6.42a2.78 2.78 0 00-1.94-1.95C18.88 4 12 4 12 4s-6.88 0-8.6.47A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.94 1.95C5.12 20 12 20 12 20s6.88 0 8.6-.47a2.78 2.78 0 001.94-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+            </svg>
+          </a>
+        </div>
+      </div>
+  </footer>
+
+  <script>
+    // ============================================
+    // DADOS SIMULADOS (MOCK DATABASE DE PROJETOS)
+    // ============================================
+    const projetosComunidade = [
+      {
+        id: 1,
+        titulo: "Relógio Bioclimático Minimalista",
+        autor: "Mariana Souza",
+        unidade: "Fab Lab Cajuru",
+        tag: "laser", // usado para o filtro
+        tagNome: "Corte a Laser",
+        data: "Maio de 2026",
+        img: "images/relogio.png",
+        resumo: "Um relógio inteligente cortado a laser e encaixado sem dobradiças.",
+        descCompleta: `
+          <p>O conceito por trás do Relógio Bioclimático Minimalista nasceu da necessidade de criar objetos decorativos úteis utilizando zero resíduos plásticos.</p>
+          <p>A carcaça foi integralmente desenhada em software de vetorização 2D e cortada na máquina Laser usando chapas de MDF recicladas disponíveis no Fab Lab Cajuru. O desafio principal foi criar as engrenagens de encaixe perfeito "snap-fit", eliminando inteiramente o uso de colas químicas e dobradiças metálicas.</p>
+          <p>O projeto aberto está disponível no repositório da Prefeitura para que qualquer visitante possa baixar e recortar o seu próprio exemplar.</p>
+        `
+      },
+      {
+        id: 2,
+        titulo: "Prótese de Mão Robótica",
+        autor: "João Pedro Alves",
+        unidade: "Fab Lab CIC",
+        tag: "3d",
+        tagNome: "Impressão 3D",
+        data: "Janeiro de 2026",
+        img: "images/protese.png",
+        resumo: "Prótese de baixo custo desenvolvida com filamentos de PLA.",
+        descCompleta: `
+          <p>A construção de soluções médicas personalizadas tem custos inacessíveis para boa parte da população. Utilizando as extrusoras FDM do Curitiba Maker de CIC, prototipamos este modelo de adaptação palmar.</p>
+          <p>As impressões em material PLA se mostraram super resistentes e laváveis. Através de elásticos tensionados comprados em papelaria, a mão consegue fechar os 5 dedos quando há inclinação de pulso, retornando o grau de preensão mecânica ao usuário acidentado. Tempo total de impressão do mecanismo completo: 14 horas.</p>
+        `
+      },
+      {
+        id: 3,
+        titulo: "Sensor de Chuva Inteligente pra Praças",
+        autor: "Grupo Técnico IFPR",
+        unidade: "Fab Lab Matriz",
+        tag: "eletro",
+        tagNome: "Eletrônica / IoT",
+        data: "Março de 2026",
+        img: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        resumo: "Mapeador de vazão de água para hortas urbanas baseado em Arduino.",
+        descCompleta: `
+          <p>Um sistema conectado via rede LoRa para medir alagamentos e rega natural. Desenvolvido com microcontroladores (Arduino), o código captura o volume pluviométrico coletado em um funil feito na impressora 3D local.</p>
+          <p>Se chover o suficiente em determinado bairro, as hortas urbanas recebem uma notificação (MQTT) automatizando a suspensão das torneiras da prefeitura e economizando milhares de litros de água tratada semanalmente.</p>
+        `
+      },
+      {
+        id: 4,
+        titulo: "Mobiliário Encaixável pra ONGs",
+        autor: "Coletivo Arquiteto do Bem",
+        unidade: "Fab Lab Boqueirão",
+        tag: "marcenaria",
+        tagNome: "Marcenaria Digital",
+        data: "Dezembro de 2025",
+        img: "images/cadeira.png",
+        resumo: "Cadeiras infantis de compensado cortadas na Router CNC.",
+        descCompleta: `
+          <p>Com o auxílio da gigante fresadora CNC, nosso coletivo vetorizou placas maciças de compensado naval para fabricar 30 banquetas educativas para uma creche local em um final de semana.</p>
+          <p>O Design Digital permitiu cortar formatos de animais e lixas ergonômicas no assento, provando que o laboratório público permite a escala manufatureira e a viabilização de doações robustas minimizando sobras de material.</p>
+        `
+      },
+      {
+        id: 5,
+        titulo: "Caixa Acústica Bluetooth de Retalhos",
+        autor: "Cláudio Silva",
+        unidade: "Fab Lab Cajuru",
+        tag: "eletro",
+        tagNome: "Híbrido (Eletrônica + Laser)",
+        data: "Abril de 2026",
+        img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        resumo: "Mixando eletrônica básica e corte a laser pra criar alto-falantes.",
+        descCompleta: `
+          <p>Um dos testes perfeitos para integrar várias mesas de trabalho no Maker. A caixa do alto-falante acústico foi dimensionada perfeitamente na cortadora a Laser.</p>
+          <p>Posteriormente, usamos a bancada de Eletrônica para soldar o módulo Bluetooth PAM8403 e a placa carregadora TP4056 a baterias recicladas de um laptop antigo. O som é profundo, encorpado pelo próprio MDF.</p>
+        `
+      }
+    ];
+
+    // ============================================
+    // RENDERIZAÇÃO DA GALERIA
+    // ============================================
+    const grid = document.getElementById('projects-grid');
+
+    function renderGallery(filter = 'todos') {
+      grid.innerHTML = '';
+
+      const filtrados = projetosComunidade.filter(p => filter === 'todos' || p.tag === filter);
+
+      if (filtrados.length === 0) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; padding:2rem;">Nenhum projeto encontrado nesta categoria no momento.</p>';
+        return;
+      }
+
+      filtrados.forEach(projeto => {
+        // Gerar card
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.onclick = () => abrirProjeto(projeto.id);
+
+        card.innerHTML = `
+          <div class="card-img-container">
+            <span class="card-tag">${projeto.tagNome}</span>
+            <img src="${projeto.img}" loading="lazy" alt="${projeto.titulo}">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">${projeto.titulo}</h3>
+            <p class="card-desc">${projeto.resumo}</p>
+            <div class="card-footer">
+              <div class="card-author">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                ${projeto.autor}
+              </div>
+              <span class="card-unit">${projeto.unidade}</span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Inicializa carregando tudo
+    renderGallery();
+
+    // ============================================
+    // SISTEMA DE FILTROS E MUDANÇA DE ESTADO
+    // ============================================
+    const btns = document.querySelectorAll('.filter-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class de todos
+        btns.forEach(b => b.classList.remove('active'));
+        // Adiciona em quem foi clicado
+        btn.classList.add('active');
+        // Pega dataset e recarrega galeria
+        renderGallery(btn.dataset.filter);
+      });
+    });
+
+    // ============================================
+    // ABERTURA DO MODAL "MÁGICO" (LIGHTBOX)
+    // ============================================
+    const modal = document.getElementById('projectModal');
+
+    function abrirProjeto(id) {
+      const p = projetosComunidade.find(x => x.id === id);
+      if (!p) return;
+
+      // Popula dados no DOM
+      document.getElementById('m-foto').src = p.img;
+      document.getElementById('m-tech').textContent = p.tagNome;
+      document.getElementById('m-unit').textContent = p.unidade;
+      document.getElementById('m-title').textContent = p.titulo;
+      document.getElementById('m-author').textContent = p.autor;
+      document.getElementById('m-date').textContent = "Terminado em: " + p.data;
+
+      // Gera iniciais pro Avatar
+      const iniciais = p.autor.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+      document.getElementById('m-avatar').textContent = iniciais;
+
+      document.getElementById('m-desc').innerHTML = p.descCompleta;
+
+      // Exibe Modal (Trava rolagem principal do site pra elegância)
+      document.body.style.overflow = 'hidden';
+      modal.classList.add('active');
+    }
+
+    function fecharProjeto() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Fecha o modal ao clicar diretamente na parte escura do fundo
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        fecharProjeto();
+      }
+    });
+
+  </script>
+</body>
+
+</html>
