@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Painel Administrativo - Curitiba Maker</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --orange: #f26522;
@@ -17,55 +19,274 @@
       --gray-text: #555550;
       --text-dark: #112e5a;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Montserrat', sans-serif; color: var(--text-dark); background: var(--gray-light); display: flex; height: 100vh; overflow: hidden; }
-    
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-dark);
+      background: var(--gray-light);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
     /* SIDEBAR */
-    .sidebar { width: 250px; background: var(--blue); color: white; display: flex; flex-direction: column; overflow-y: auto; }
-    .sidebar-header { padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .sidebar-header h2 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; }
-    .sidebar-header h2 span { color: var(--orange); }
-    .nav-list { list-style: none; padding: 1rem 0; flex: 1; }
-    .nav-list li a { display: flex; align-items: center; padding: 0.8rem 1.5rem; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: background 0.2s, color 0.2s; }
-    .nav-list li a:hover, .nav-list li a.active { background: rgba(255,255,255,0.1); color: white; border-left: 4px solid var(--orange); }
-    
+    .sidebar {
+      width: 250px;
+      background: var(--blue);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar-header h2 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .sidebar-header h2 span {
+      color: var(--orange);
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 1rem 0;
+      flex: 1;
+    }
+
+    .nav-list li a {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-list li a:hover,
+    .nav-list li a.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border-left: 4px solid var(--orange);
+    }
+
     /* MAIN AREA */
-    .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; }
-    .header { background: white; height: 64px; min-height: 64px; display: flex; align-items: center; padding: 0 2rem; border-bottom: 1px solid var(--gray-mid); justify-content: space-between; }
-    .header h1 { font-size: 1.1rem; color: var(--text-dark); font-weight: 700; }
-    .user-info { font-size: 0.85rem; color: var(--gray-text); display: flex; align-items: center; gap: 10px; }
-    .user-avatar { width: 32px; height: 32px; background: var(--blue); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-    
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .header {
+      background: white;
+      height: 64px;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      border-bottom: 1px solid var(--gray-mid);
+      justify-content: space-between;
+    }
+
+    .header h1 {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    .user-info {
+      font-size: 0.85rem;
+      color: var(--gray-text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--blue);
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
     /* CONTENT */
-    .content { padding: 2rem; flex: 1; }
-    .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-    .toolbar input { padding: 0.6rem 1rem; border: 1px solid var(--gray-mid); border-radius: 6px; font-family: inherit; width: 250px; }
-    .btn { background: var(--orange); color: white; border: none; padding: 0.65rem 1.2rem; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-family: inherit; font-size: 0.85rem;}
-    .btn:hover { background: var(--orange-dark); }
-    .btn-secondary { background: white; color: var(--text-dark); border: 1px solid var(--gray-mid); }
-    .btn-secondary:hover { background: var(--gray-light); }
-    .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.75rem;}
-    
+    .content {
+      padding: 2rem;
+      flex: 1;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .toolbar input {
+      padding: 0.6rem 1rem;
+      border: 1px solid var(--gray-mid);
+      border-radius: 6px;
+      font-family: inherit;
+      width: 250px;
+    }
+
+    .btn {
+      background: var(--orange);
+      color: white;
+      border: none;
+      padding: 0.65rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+
+    .btn:hover {
+      background: var(--orange-dark);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text-dark);
+      border: 1px solid var(--gray-mid);
+    }
+
+    .btn-secondary:hover {
+      background: var(--gray-light);
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+    }
+
     /* TABLE */
-    .table-card { background: white; border-radius: 8px; border: 1px solid var(--gray-mid); overflow: hidden; }
-    table { width: 100%; border-collapse: collapse; text-align: left; }
-    th, td { padding: 1rem 1.5rem; border-bottom: 1px solid var(--gray-mid); }
-    th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-text); background: #fafafa; font-weight: 600; }
-    td { font-size: 0.9rem; color: var(--text-dark); }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: var(--gray-light); }
-    .cell-actions { display: flex; gap: 8px; }
-    
+    .table-card {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--gray-mid);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th,
+    td {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    th {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-text);
+      background: #fafafa;
+      font-weight: 600;
+    }
+
+    td {
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: var(--gray-light);
+    }
+
+    .cell-actions {
+      display: flex;
+      gap: 8px;
+    }
+
     /* MODAL */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; }
-    .modal { background: white; width: 500px; max-width: 90%; border-radius: 8px; padding: 2rem; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
-    .modal h2 { margin-bottom: 1.5rem; font-size: 1.25rem; color: var(--blue); }
-    .form-group { margin-bottom: 1rem; }
-    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-dark); }
-    .form-group input, .form-group select { width: 100%; padding: 0.6rem; border: 1px solid var(--gray-mid); border-radius: 6px; font-family: inherit; }
-    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 2rem; }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal {
+      background: white;
+      width: 500px;
+      max-width: 90%;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+      color: var(--blue);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text-dark);
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid var(--gray-mid);
+      border-radius: 6px;
+      font-family: inherit;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 2rem;
+    }
   </style>
 </head>
+
 <body>
 
   <!-- SIDEBAR -->
@@ -80,7 +301,8 @@
       <li><a href="#">Configurações</a></li>
     </ul>
     <div style="margin-top:auto; padding: 1rem;">
-      <a href="curitiba-maker (1).html" style="color:rgba(255,255,255,0.6); font-size: 0.8rem; text-decoration: none;">&larr; Voltar ao portal</a>
+      <a href="index.html"
+        style="color:rgba(255,255,255,0.6); font-size: 0.8rem; text-decoration: none;">&larr; Voltar ao portal</a>
     </div>
   </aside>
 
@@ -107,6 +329,7 @@
               <th>ID</th>
               <th>Nome do Curso</th>
               <th>Categoria</th>
+              <th>Unidade</th>
               <th>Carga Horária</th>
               <th>Status</th>
               <th>Ações</th>
@@ -130,13 +353,38 @@
           <input type="text" id="cursoNome" placeholder="Ex: Robótica Básica" required>
         </div>
         <div class="form-group">
-          <label>Categoria</label>
-          <select id="cursoCategoria">
-            <option value="Fabricação Digital">Fabricação Digital</option>
-            <option value="Eletrônica">Eletrônica</option>
-            <option value="Programação">Programação</option>
-            <option value="Design">Design</option>
-          </select>
+          <label>Descrição</label>
+          <textarea id="cursoDescricao" rows="3" placeholder="Insira os detalhes do que será aprendido neste curso..."
+            style="width: 100%; padding: 0.6rem; border: 1px solid var(--gray-mid); border-radius: 6px; font-family: inherit; resize: vertical;"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Imagem de Fundo (Link URL Opcional)</label>
+          <input type="url" id="cursoImagem" placeholder="Ex: https://... (Deixe em branco para o padrão)">
+        </div>
+        <div style="display:flex; gap:10px;">
+          <div class="form-group" style="flex:1;">
+            <label>Categoria</label>
+            <input type="text" id="cursoCategoria" list="categorias-list" placeholder="Ex: Fabricação Digital" required>
+            <datalist id="categorias-list">
+              <option value="Fabricação Digital"></option>
+              <option value="Eletrônica"></option>
+              <option value="Programação"></option>
+              <option value="Design"></option>
+              <option value="Robótica"></option>
+              <option value="Marcenaria"></option>
+            </datalist>
+          </div>
+          <div class="form-group" style="flex:1;">
+            <label>Unidade do Fab Lab</label>
+            <input type="text" id="cursoUnidade" list="unidades-list" placeholder="Ex: Todas as unidades" required>
+            <datalist id="unidades-list">
+              <option value="Todas as unidades"></option>
+              <option value="Centro Cívico"></option>
+              <option value="CIC"></option>
+              <option value="Cajuru"></option>
+              <option value="Boqueirão"></option>
+            </datalist>
+          </div>
         </div>
         <div style="display:flex; gap:10px;">
           <div class="form-group" style="flex:1;">
@@ -152,12 +400,24 @@
             </select>
           </div>
         </div>
-        <div class="form-group">
-          <label>Status</label>
-          <select id="cursoStatus">
-            <option value="Ativo">Ativo</option>
-            <option value="Rascunho">Rascunho</option>
-          </select>
+        <div style="display:flex; gap:10px;">
+          <div class="form-group" style="flex:1;">
+            <label>Ícone Visual</label>
+            <select id="cursoIcone">
+              <option value="cube">Cubo / 3D</option>
+              <option value="lightning">Raio / Eletrônica</option>
+              <option value="code">Código / Web</option>
+              <option value="vector">Vetor / Design</option>
+              <option value="tool">Ferramenta / Maker</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex:1;">
+            <label>Status</label>
+            <select id="cursoStatus">
+              <option value="Ativo">Ativo</option>
+              <option value="Rascunho">Rascunho</option>
+            </select>
+          </div>
         </div>
         <div class="modal-actions">
           <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
@@ -167,66 +427,72 @@
     </div>
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+  <!-- Firebase SDK (Compat Version para suportar execução direta por file:// sem servidor) -->
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
 
+  <script>
     // --- CONFIGURAÇÃO DO FIREBASE ---
     // Você vai colar suas chaves do Firebase Console aqui para ativar a comunicação real.
     // Enquanto estiver vazio, o painel usará o LocalStorage do navegador.
     const firebaseConfig = {
-      // apiKey: "COLE_SUA_API_KEY",
-      // authDomain: "SEU_PROJETO.firebaseapp.com",
-      // projectId: "SEU_PROJETO",
-      // storageBucket: "SEU_PROJETO.appspot.com",
-      // messagingSenderId: "COLE_O_SENDER_ID",
-      // appId: "COLE_O_APP_ID"
+      apiKey: "AIzaSyD_vq50HpRarB0RLcaFqbWX6cQUG61mMGg",
+      authDomain: "curitibamaker.firebaseapp.com",
+      projectId: "curitibamaker",
+      storageBucket: "curitibamaker.firebasestorage.app",
+      messagingSenderId: "653835370734",
+      appId: "1:653835370734:web:7db83c4e66dc0d5026b3ff",
+      measurementId: "G-327BKEV4D8"
     };
 
     const useFirebase = Object.keys(firebaseConfig).length > 0;
     let db;
     let firebaseCursosCollection;
-    
+
     if (useFirebase) {
-      const app = initializeApp(firebaseConfig);
-      db = getFirestore(app);
-      firebaseCursosCollection = collection(db, "cursos");
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.firestore();
+      firebaseCursosCollection = db.collection("cursos");
     }
 
     const tbody = document.getElementById('tabelaCursosBody');
     let currentEditId = null;
 
     // Funções Globais (acessíveis pelo HTML inline onclick)
-    window.openModal = function(id = null, cursoData = null) {
+    window.openModal = function (id = null, cursoData = null) {
       currentEditId = id;
       document.getElementById('modalTitle').textContent = id ? "Editar Curso" : "Cadastrar Curso";
       document.getElementById('formModal').style.display = 'flex';
-      
+
       if (cursoData) {
         document.getElementById('cursoNome').value = cursoData.nome || '';
+        document.getElementById('cursoDescricao').value = cursoData.descricao || '';
+        document.getElementById('cursoImagem').value = cursoData.imagem || '';
         document.getElementById('cursoCategoria').value = cursoData.categoria || 'Fabricação Digital';
+        document.getElementById('cursoUnidade').value = cursoData.unidade || 'Todas as unidades';
         document.getElementById('cursoCarga').value = cursoData.carga || '';
         document.getElementById('cursoNivel').value = cursoData.nivel || 'Iniciante';
+        document.getElementById('cursoIcone').value = cursoData.icone || 'cube';
         document.getElementById('cursoStatus').value = cursoData.status || 'Ativo';
       } else {
         document.getElementById('adminForm').reset();
       }
     };
 
-    window.closeModal = function() {
+    window.closeModal = function () {
       document.getElementById('formModal').style.display = 'none';
       currentEditId = null;
     };
 
-    window.deleteCurso = async function(id) {
+    window.deleteCurso = async function (id) {
       if (!confirm("Tem certeza que deseja excluir este curso?")) return;
-      
+
       if (useFirebase) {
         try {
-          await deleteDoc(doc(db, "cursos", id));
-        } catch(e) { 
-          console.error(e); 
-          alert("Erro ao excluir do Firebase."); 
+          await firebaseCursosCollection.doc(id).delete();
+        } catch (e) {
+          console.error(e);
+          alert("Erro ao excluir do Firebase.");
         }
       } else {
         let dados = JSON.parse(localStorage.getItem('cursos_db') || '[]');
@@ -242,7 +508,7 @@
 
       if (useFirebase) {
         try {
-          const querySnapshot = await getDocs(firebaseCursosCollection);
+          const querySnapshot = await firebaseCursosCollection.get();
           querySnapshot.forEach((doc) => {
             cursosList.push({ id: doc.id, ...doc.data() });
           });
@@ -276,11 +542,12 @@
         const tr = document.createElement('tr');
         const statusColor = curso.status === 'Ativo' ? 'var(--blue)' : 'var(--gray-text)';
         const safeData = JSON.stringify(curso).replace(/'/g, "&apos;").replace(/"/g, "&quot;");
-        
+
         tr.innerHTML = `
-          <td>${curso.id.substring(0,6)}...</td>
+          <td>${curso.id.substring(0, 6)}...</td>
           <td>${curso.nome}</td>
           <td>${curso.categoria}</td>
+          <td>${curso.unidade || 'Todas as unidades'}</td>
           <td>${curso.carga}</td>
           <td><span style="color:${statusColor}; font-weight:bold;">${curso.status || 'Ativo'}</span></td>
           <td class="cell-actions">
@@ -295,23 +562,27 @@
     // Formulário Submit (Criar ou Atualizar)
     document.getElementById('adminForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const novoCurso = {
         nome: document.getElementById('cursoNome').value,
+        descricao: document.getElementById('cursoDescricao').value,
+        imagem: document.getElementById('cursoImagem').value,
         categoria: document.getElementById('cursoCategoria').value,
+        unidade: document.getElementById('cursoUnidade').value,
         carga: document.getElementById('cursoCarga').value,
         nivel: document.getElementById('cursoNivel').value,
+        icone: document.getElementById('cursoIcone').value,
         status: document.getElementById('cursoStatus').value
       };
 
       if (useFirebase) {
         try {
           if (currentEditId) {
-            await updateDoc(doc(db, "cursos", currentEditId), novoCurso);
+            await firebaseCursosCollection.doc(currentEditId).update(novoCurso);
           } else {
-            await addDoc(firebaseCursosCollection, novoCurso);
+            await firebaseCursosCollection.add(novoCurso);
           }
-        } catch(e) {
+        } catch (e) {
           console.error("Erro salvando no Firebase", e);
           alert("Erro ao salvar no banco Firebase");
           return;
@@ -338,4 +609,5 @@
     });
   </script>
 </body>
+
 </html>

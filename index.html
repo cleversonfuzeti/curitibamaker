@@ -198,8 +198,11 @@
 
     /* HERO */
     .hero {
-      background: var(--blue);
-      min-height: 540px;
+      background: linear-gradient(rgba(0, 79, 159, 0.8), rgba(0, 79, 159, 0.9)), url('images/cajuru-hero.jpg');
+      background-size: cover;
+      background-position: center;
+      aspect-ratio: 1920 / 667;
+      min-height: 500px;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -427,6 +430,7 @@
     /* SECTIONS COMMON */
     section {
       padding: 5rem 2rem;
+      scroll-margin-top: 64px;
     }
 
     .section-inner {
@@ -470,7 +474,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
-      align-items: center;
+      align-items: flex-start;
     }
 
     .about-visual {
@@ -728,7 +732,7 @@
     }
 
     .course-card:hover {
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.09);
+      box-shadow: 0 8px 30px rgba(0, 79, 159, 0.12);
       transform: translateY(-3px);
     }
 
@@ -751,8 +755,8 @@
       opacity: 0.9;
     }
 
-    .course-thumb-bg-orange {
-      background: linear-gradient(135deg, #e65610, #fa843e);
+    .course-thumb-bg-lightblue {
+      background: linear-gradient(135deg, #0f7eda, #3badf7);
     }
 
     .course-thumb-bg-blue {
@@ -1076,6 +1080,7 @@
         <li><a href="#sobre">Quem somos</a></li>
         <li><a href="#unidades">Unidades</a></li>
         <li><a href="#cursos">Cursos</a></li>
+        <li><a href="projetos.html">Projetos</a></li>
         <li><a href="#como-participar">Como participar</a></li>
       </ul>
     </div>
@@ -1085,7 +1090,7 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-content">
-        <div class="hero-badge"><span></span>Laboratório de prototipagem público</div>
+        <div class="hero-badge"><span></span>Laboratórios públicos de prototipagem</div>
         <h1>Criatividade. Aprendizado.<br><em>Inovação.</em></h1>
         <p><b>Democratizando</b> o acesso à tecnologia e ao conhecimento para todos os curitibanos.</p>
         <div class="hero-actions">
@@ -1166,19 +1171,20 @@
       <div class="about-grid">
         <div>
           <span class="section-label">Quem somos</span>
-          <h2 class="section-title">Laboratórios de fabricação digital para toda a cidade</h2>
+          <h2 class="section-title">Inovação para todos!</h2>
           <p class="section-sub">O Curitiba Maker é um Programa da Secretaria de Desenvolvimento Econômico e Inovação,
-            que conta com uma rede de espaços públicos de inovação onde qualquer cidadão pode
+            que conta com Fab Labs (Laboratórios de fabricação digital) públicos, onde qualquer cidadão pode
             aprender tecnologia, desenvolver projetos e acessar equipamentos profissionais de forma gratuita.</p>
 
-          <div id="como-participar">
-            <span class="section-label" style="margin-top: 2rem; display: block;">Como participar</span>
+          <div id="como-participar" style="margin-top: 8rem; scroll-margin-top: 80px;">
+            <span class="section-label" style="display: block;">Como participar</span>
             <ul class="about-steps">
               <li>
                 <div class="step-num">1</div>
                 <div class="step-text">
-                  <strong>Cadastre-se gratuitamente</strong>
-                  <span>Use seus dados do E-Cidadão Curitiba para acessar a plataforma em segundos.</span>
+                  <strong>Submeta seu projeto</strong>
+                  <span>No Fab Lab você pode desenvolver o seu projeto gratuitamente. Submeta seu projeto para análise e
+                    agendamento de atendimento.</span>
                 </div>
               </li>
               <li>
@@ -1192,7 +1198,7 @@
                 <div class="step-num">3</div>
                 <div class="step-text">
                   <strong>Faça sua inscrição</strong>
-                  <span>Inscreva-se em turmas abertas e receba a confirmação por e-mail ou SMS.</span>
+                  <span>Inscreva-se em turmas abertas e amplie o seu conhecimento.</span>
                 </div>
               </li>
               <li>
@@ -1447,197 +1453,18 @@
       </div>
 
       <div class="courses-grid" id="courses-grid">
-
-        <div class="course-card" data-cat="fabricacao">
-          <div class="course-thumb course-thumb-bg-orange">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-              <path d="M6 3h12l3 9-3 3H6l-3-3z" />
-              <path d="M3 12h18M12 3v18" />
-            </svg>
-            <span class="course-cat-badge">Fabricação Digital</span>
-          </div>
-          <div class="course-body">
-            <h3>Impressão 3D: Introdução ao FDM</h3>
-            <p>Aprenda os fundamentos da impressão 3D FDM, da modelagem ao produto final com filamentos PLA e PETG.</p>
-            <div class="course-meta">
-              <span><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg> 16h</span>
-              <span><svg viewBox="0 0 24 24">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                </svg> Iniciante</span>
-            </div>
-          </div>
-          <div class="course-footer">
-            <span class="course-unit">Centro Cívico • Boa Vista</span>
-            <a href="#" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg></a>
-          </div>
-        </div>
-
-        <div class="course-card" data-cat="fabricacao">
-          <div class="course-thumb course-thumb-bg-orange">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-              <path
-                d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-            </svg>
-            <span class="course-cat-badge">Fabricação Digital</span>
-          </div>
-          <div class="course-body">
-            <h3>Corte a Laser: Bijuterias em Acrílico</h3>
-            <p>Crie bijuterias únicas usando Inkscape e a cortadora a laser. Do design ao produto acabado.</p>
-            <div class="course-meta">
-              <span><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg> 12h</span>
-              <span><svg viewBox="0 0 24 24">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                </svg> Iniciante</span>
-            </div>
-          </div>
-          <div class="course-footer">
-            <span class="course-unit">Boqueirão • Pinheirinho</span>
-            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg></a>
-          </div>
-        </div>
-
-        <div class="course-card" data-cat="eletro">
-          <div class="course-thumb course-thumb-bg-orange">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-            <span class="course-cat-badge">Eletrônica</span>
-          </div>
-          <div class="course-body">
-            <h3>Arduino: Introdução com Sensores e Motores</h3>
-            <p>Monte circuitos com Arduino e aprenda a controlar sensores de temperatura, movimento e motores DC.</p>
-            <div class="course-meta">
-              <span><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg> 20h</span>
-              <span><svg viewBox="0 0 24 24">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                </svg> Básico</span>
-            </div>
-          </div>
-          <div class="course-footer">
-            <span class="course-unit">Todas as unidades</span>
-            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg></a>
-          </div>
-        </div>
-
-        <div class="course-card" data-cat="eletro">
-          <div class="course-thumb course-thumb-bg-orange">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 8v4M12 16h.01" />
-            </svg>
-            <span class="course-cat-badge">Eletrônica</span>
-          </div>
-          <div class="course-body">
-            <h3>Eletrônica: Introdução com Protoboard</h3>
-            <p>Primeiros passos em eletrônica analógica: resistores, LEDs, capacitores e transistores sem solda.</p>
-            <div class="course-meta">
-              <span><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg> 10h</span>
-              <span><svg viewBox="0 0 24 24">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                </svg> Iniciante</span>
-            </div>
-          </div>
-          <div class="course-footer">
-            <span class="course-unit">Centro Cívico • Boqueirão</span>
-            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg></a>
-          </div>
-        </div>
-
-        <div class="course-card" data-cat="prog">
-          <div class="course-thumb course-thumb-bg-orange">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-              <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span class="course-cat-badge">Programação</span>
-          </div>
-          <div class="course-body">
-            <h3>Programação: Apps Android com App Inventor</h3>
-            <p>Crie seus próprios aplicativos para celular usando blocos visuais, sem precisar saber código.</p>
-            <div class="course-meta">
-              <span><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg> 16h</span>
-              <span><svg viewBox="0 0 24 24">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                </svg> Iniciante</span>
-            </div>
-          </div>
-          <div class="course-footer">
-            <span class="course-unit">Boa Vista • Pinheirinho</span>
-            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg></a>
-          </div>
-        </div>
-
-        <div class="course-card" data-cat="design">
-          <div class="course-thumb course-thumb-bg-orange">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-              <circle cx="13.5" cy="6.5" r="2.5" />
-              <circle cx="6.5" cy="17.5" r="2.5" />
-              <path d="M13.5 9v1.5l-7 7" />
-            </svg>
-            <span class="course-cat-badge">Design</span>
-          </div>
-          <div class="course-body">
-            <h3>Design Digital: Introdução ao Inkscape</h3>
-            <p>Aprenda design vetorial do zero: criar logos, cartazes e arquivos para corte e impressão.</p>
-            <div class="course-meta">
-              <span><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg> 12h</span>
-              <span><svg viewBox="0 0 24 24">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                </svg> Iniciante</span>
-            </div>
-          </div>
-          <div class="course-footer">
-            <span class="course-unit">Centro Cívico • CIC</span>
-            <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg></a>
-          </div>
-        </div>
-
+        <!-- Cursos serão renderizados dinamicamente pelo Javascript conectando com Firebase/LocalStorage -->
       </div>
     </div>
   </section>
 
   <!-- CTA -->
   <div class="cta-section">
-    <h2>Pronto para <em>fazer acontecer?</em></h2>
-    <p>Cadastre-se gratuitamente e acesse todos os cursos e laboratórios da rede Curitiba Maker.</p>
+    <h2>Pronto para <em>prototipar?</em></h2>
+    <p>Submeta seu projeto para análise.</p>
     <div class="cta-btns">
-      <a href="#" class="btn-primary">Criar minha conta</a>
-      <a href="#cursos" class="btn-outline">Ver todos os cursos</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSflrWY7eTtN5j8uNsIQf175RC8Fyr1Dc1ZgvVXwqmfmFdDypA/viewform"
+        class="btn-primary" target="_blank">SUBMETER PROJETO</a>
     </div>
   </div>
 
@@ -1647,11 +1474,10 @@
       <div class="footer-top">
         <div class="footer-brand">
           <a href="#" class="nav-logo" style="display: inline-flex;">
-            <div style="width: 6px; height: 36px;"></div>
+
             <span class="nav-logo-text">CURITIBA <span>MAKER</span></span>
           </a>
-          <p>Rede municipal de laboratórios de fabricação digital da Prefeitura de Curitiba. Acesso gratuito para todos
-            os cidadãos.</p>
+          <p>Laboratórios públicos de prototipagem da Prefeitura de Curitiba. <br>Inovação para todos.</p>
         </div>
         <div>
           <h4>Institucional</h4>
@@ -1659,6 +1485,7 @@
             <li><a href="#sobre">Quem somos</a></li>
             <li><a href="#como-participar">Como participar</a></li>
             <li><a href="#unidades">Onde estamos</a></li>
+            <li><a href="projetos.html">Galeria de Projetos</a></li>
             <li><a href="#">Quem pode participar</a></li>
           </ul>
         </div>
@@ -1707,24 +1534,176 @@
     </div>
   </footer>
 
-  <script>
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.course-card');
+  <!-- Firebase SDK (Compat Version) -->
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        cards.forEach(card => {
-          if (filter === 'all' || card.dataset.cat === filter) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
+  <script>
+    // --- Mapeamento de Ícones Visuais ---
+    const getIconSvg = (iconName) => {
+      const icons = {
+        'cube': '<path d="M6 3h12l3 9-3 3H6l-3-3z" /><path d="M3 12h18M12 3v18" />',
+        'lightning': '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />',
+        'code': '<path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />',
+        'vector': '<circle cx="13.5" cy="6.5" r="2.5" /><circle cx="6.5" cy="17.5" r="2.5" /><path d="M13.5 9v1.5l-7 7" />',
+        'tool': '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>'
+      };
+      return icons[iconName] || icons['cube'];
+    };
+
+    // --- Mapeamento de Tonalidade (Cores) ---
+    const getCatGradient = (cat) => {
+      cat = cat || 'Outros';
+      const palette = [
+        'linear-gradient(135deg, #0f7eda, #3badf7)', // Azul (Padrão PMC)
+        'linear-gradient(135deg, #e65c00, #fca311)', // Laranja (Padrão PMC)
+        'linear-gradient(135deg, #008B8B, #20B2AA)', // Verde-Água / Turquesa
+        'linear-gradient(135deg, #5c258d, #4389a2)', // Roxo / Design
+        'linear-gradient(135deg, #e52d27, #b31217)', // Vermelho
+        'linear-gradient(135deg, #3CA55C, #B5AC49)'  // Verde
+      ];
+      // Categorias conhecidas para manter consistência nas oficiais
+      const lower = cat.toLowerCase();
+      if (lower.includes('eletr')) return palette[1];
+      if (lower.includes('progra')) return palette[2];
+      if (lower.includes('design')) return palette[3];
+      if (lower.includes('fabrica')) return palette[0];
+
+      let hash = 0;
+      for (let i = 0; i < cat.length; i++) {
+        hash = cat.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      return palette[Math.abs(hash) % palette.length];
+    };
+
+    const renderCursos = (cursos) => {
+      const grid = document.getElementById('courses-grid');
+      const toolbar = document.querySelector('.courses-toolbar');
+
+      grid.innerHTML = '';
+
+      const cursosAtivos = cursos.filter(c => c.status !== 'Rascunho');
+
+      if (cursosAtivos.length === 0) {
+        grid.innerHTML = '<p style="grid-column: 1 / -1; color: var(--gray-text); text-align: center;">Nenhum curso disponível no momento. Fique de olho no portal!</p>';
+        if (toolbar) toolbar.innerHTML = '';
+        return;
+      }
+
+      // --- Recriar a barra de filtros baseada nas categorias únicas existentes ---
+      if (toolbar) {
+        toolbar.innerHTML = '<button class="filter-btn active" data-filter="all">Todos</button>';
+        const uniqueCategories = [...new Set(cursosAtivos.map(c => c.categoria))];
+        uniqueCategories.forEach(cat => {
+          const safeId = cat.toLowerCase().replace(/[^a-z0-9]/g, '');
+          toolbar.innerHTML += `<button class="filter-btn" data-filter="${safeId}">${cat}</button>`;
         });
+      }
+
+      cursosAtivos.forEach(curso => {
+        const safeCatId = curso.categoria ? curso.categoria.toLowerCase().replace(/[^a-z0-9]/g, '') : 'outros';
+        const cardHtml = `
+          <div class="course-card" data-cat="${safeCatId}">
+            <div class="course-thumb" style="${curso.imagem ? `background-image: url('${curso.imagem}');` : ''} background-color: var(--gray-mid); background-size: cover; background-position: center;">
+              <div style="position: absolute; inset: 0; background: ${getCatGradient(curso.categoria)}; opacity: ${curso.imagem ? '0.85' : '1'};"></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" style="position: relative; z-index: 1;">
+                ${getIconSvg(curso.icone)}
+              </svg>
+              <span class="course-cat-badge" style="position: relative; z-index: 1;">${curso.categoria || 'Curso'}</span>
+            </div>
+            <div class="course-body">
+              <h3>${curso.nome}</h3>
+              <p>${curso.descricao || 'Venha aprender os fundamentos de ' + (curso.categoria || 'tecnologia') + ' de forma prática no nosso laboratório.'}</p>
+              <div class="course-meta">
+                <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg> ${curso.carga || '-'}</span>
+                <span><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /></svg> ${curso.nivel || 'Iniciante'}</span>
+              </div>
+            </div>
+            <div class="course-footer">
+              <span class="course-unit">${curso.unidade || 'Todas Unidades'}</span>
+              <a href="https://aprendere.curitiba.pr.gov.br/Cursos?CursoPesquisa.OrgaoPromotorId=55" target="_blank" class="course-link">Inscrever-se <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" /></svg></a>
+            </div>
+          </div>
+        `;
+        grid.innerHTML += cardHtml;
       });
-    });
+
+      atualizarFiltros();
+    };
+
+    // --- CONFIGURAÇÃO DO FIREBASE (Compartilhada do Admin) ---
+    const firebaseConfig = {
+      apiKey: "AIzaSyD_vq50HpRarB0RLcaFqbWX6cQUG61mMGg",
+      authDomain: "curitibamaker.firebaseapp.com",
+      projectId: "curitibamaker",
+      storageBucket: "curitibamaker.firebasestorage.app",
+      messagingSenderId: "653835370734",
+      appId: "1:653835370734:web:7db83c4e66dc0d5026b3ff",
+      measurementId: "G-327BKEV4D8"
+    };
+
+    const useFirebase = Object.keys(firebaseConfig).length > 0;
+
+    async function loadData() {
+      const grid = document.getElementById('courses-grid');
+      grid.innerHTML = '<p style="grid-column: 1 / -1; color: var(--gray-text); text-align: center;">Carregando catálogo...</p>';
+
+      if (useFirebase) {
+        try {
+          if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+          }
+          const db = firebase.firestore();
+          const snapshot = await db.collection("cursos").get();
+          let cursosList = [];
+          snapshot.forEach(doc => {
+            cursosList.push({ id: doc.id, ...doc.data() });
+          });
+          renderCursos(cursosList);
+        } catch (e) {
+          console.error("Erro ao ler Firebase: ", e);
+          grid.innerHTML = '<p style="grid-column: 1 / -1; color: red;">Erro ao carregar cursos. Tente novamente mais tarde.</p>';
+        }
+      } else {
+        // Fallback para LocalStorage caso não haja firebase cadastrado ainda
+        const cursosLocal = JSON.parse(localStorage.getItem('cursos_db') || '[]');
+        if (cursosLocal.length === 0) {
+          // Fallback final: cria alguns exemplos se o localstorage estiver completamente limpo e firebase off
+          const mock = [
+            { id: "1", nome: "Impressão 3D e Modelagem", categoria: "Fabricação Digital", carga: "16h", status: "Ativo", nivel: "Básico" }
+          ];
+          renderCursos(mock);
+        } else {
+          renderCursos(cursosLocal);
+        }
+      }
+    }
+
+    // --- Filtros Visuais da Galeria ---
+    function atualizarFiltros() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.course-card');
+
+      filterBtns.forEach(btn => {
+        btn.onclick = () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.dataset.filter;
+          cards.forEach(card => {
+            if (filter === 'all' || card.dataset.cat === filter) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        };
+      });
+      // Aplica o filtro atual de forma limpa
+      if (filterBtns[0]) filterBtns[0].click();
+    }
+
+    // Chama o carregamento da lista ao terminar de carregar os recursos
+    document.addEventListener("DOMContentLoaded", loadData);
   </script>
 </body>
 
