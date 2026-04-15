@@ -5,12 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Curitiba Maker - Dashboard BI</title>
-  
+
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- Chart.js para os gráficos -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -21,7 +22,7 @@
       --blue-light: #e6f2fb;
       --orange: #f26522;
       --yellow: #FFD700;
-      
+
       --bg-color: #f4f5f7;
       --card-bg: #ffffff;
       --text-dark: #333333;
@@ -29,7 +30,11 @@
       --sidebar-width: 250px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Montserrat', sans-serif;
@@ -49,13 +54,13 @@
       flex-direction: column;
       position: fixed;
       height: 100vh;
-      box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+      box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
       z-index: 100;
     }
 
     .sidebar-header {
       padding: 2rem 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .sidebar-header h2 {
@@ -63,10 +68,10 @@
       font-size: 1.2rem;
       letter-spacing: 0.5px;
     }
-    
+
     .sidebar-header p {
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       margin-top: 5px;
     }
 
@@ -75,26 +80,36 @@
       flex: 1;
     }
 
-    .sidebar-nav ul { list-style: none; }
-    .sidebar-nav li { margin-bottom: 5px; }
+    .sidebar-nav ul {
+      list-style: none;
+    }
+
+    .sidebar-nav li {
+      margin-bottom: 5px;
+    }
+
     .sidebar-nav a {
       display: flex;
       align-items: center;
       padding: 12px 1.5rem;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
       font-weight: 500;
       font-size: 0.9rem;
       transition: all 0.2s;
     }
-    
-    .sidebar-nav a:hover, .sidebar-nav a.active {
-      background-color: rgba(255,255,255,0.1);
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background-color: rgba(255, 255, 255, 0.1);
       color: white;
       border-left: 4px solid var(--orange);
     }
-    
-    .sidebar-nav a svg { margin-right: 15px; width: 20px; }
+
+    .sidebar-nav a svg {
+      margin-right: 15px;
+      width: 20px;
+    }
 
     /* CONTENT AREA */
     .main-content {
@@ -108,7 +123,7 @@
     .topbar {
       height: 70px;
       background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -129,13 +144,14 @@
       gap: 15px;
       align-items: center;
     }
-    
+
     .btn-export {
       background: var(--blue-light);
       color: var(--blue-action);
       border: 1px solid var(--blue-action);
       padding: 8px 16px;
-      border-radius: 50px; /* Estilo PMC */
+      border-radius: 50px;
+      /* Estilo PMC */
       font-family: inherit;
       font-size: 0.85rem;
       font-weight: 600;
@@ -168,8 +184,8 @@
       background: var(--card-bg);
       border-radius: 12px;
       padding: 1.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
-      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.05);
       display: flex;
       flex-direction: column;
     }
@@ -194,7 +210,12 @@
       margin-top: 8px;
       font-weight: 500;
     }
-    .trend.up { color: #2c9447; } /* Verde positivo PMC style */
+
+    .trend.up {
+      color: #2c9447;
+    }
+
+    /* Verde positivo PMC style */
 
     /* GRÁFICOS GRID */
     .charts-grid {
@@ -207,8 +228,8 @@
       background: var(--card-bg);
       border-radius: 12px;
       padding: 1.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
-      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.05);
       display: flex;
       flex-direction: column;
     }
@@ -228,17 +249,29 @@
 
     .chart-container {
       position: relative;
-      height: 300px; /* Altura padrão para os gráficos */
+      height: 300px;
+      /* Altura padrão para os gráficos */
       width: 100%;
     }
 
     @media (max-width: 1024px) {
-      .charts-grid { grid-template-columns: 1fr; }
-      .chart-card.wide { grid-column: span 1; }
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-card.wide {
+        grid-column: span 1;
+      }
     }
+
     @media (max-width: 768px) {
-      .sidebar { transform: translateX(-100%); }
-      .main-content { margin-left: 0; }
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
     }
   </style>
 </head>
@@ -255,25 +288,42 @@
       <ul>
         <li>
           <a href="#" class="active">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+            </svg>
             Visão Geral
           </a>
         </li>
         <li>
           <a href="#">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+              </path>
+            </svg>
             Demografia
           </a>
         </li>
         <li>
           <a href="#">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
             Localização
           </a>
         </li>
         <li>
           <a href="index.html" style="margin-top: 2rem; color: #a9c6e2;">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
+              </path>
+            </svg>
             Voltar ao Site
           </a>
         </li>
@@ -291,14 +341,17 @@
           <option>Este Ano</option>
         </select>
         <button class="btn-export">
-          <svg width="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <svg width="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+          </svg>
           Exportar PDF
         </button>
       </div>
     </header>
 
     <div class="dashboard-container">
-      
+
       <!-- KPIs -->
       <div class="kpi-grid">
         <div class="kpi-card">
@@ -325,7 +378,7 @@
 
       <!-- CHARTS -->
       <div class="charts-grid">
-        
+
         <div class="chart-card">
           <h3>Distribuição por Sexo/Gênero</h3>
           <div class="chart-container">
@@ -454,11 +507,11 @@
       type: 'bar',
       data: {
         labels: [
-          'Catálogo de Cursos', 
-          'Páginas das Unidades', 
-          'Top Bar (Pesquisa)', 
-          'Como Participar', 
-          'Banner Principal', 
+          'Catálogo de Cursos',
+          'Páginas das Unidades',
+          'Top Bar (Pesquisa)',
+          'Como Participar',
+          'Banner Principal',
           'Rodapé (Contato)'
         ],
         datasets: [{
@@ -489,4 +542,5 @@
     });
   </script>
 </body>
+
 </html>
